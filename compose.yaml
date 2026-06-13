@@ -1,0 +1,38 @@
+services:
+  postgres:
+    image: postgres:18.2
+    healthcheck:
+      test: pg_isready -U admin -d postgres
+      interval: 5s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: secret
+      POSTGRES_DB: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql
+
+
+  backend:
+    build:
+      context: .
+      dockerfile: docker/backend.dockerfile
+      args:
+        TARGET: ${TARGET}
+        PROFILE: ${PROFILE}
+    environment:
+      RUST_LOG: trace
+      DEPLOYMENT_PROFILE: local
+      DATABASE_CREDENTIALS_SECRET_NAME: rds!replace_with_real_secret_name
+    ports:
+      - "8080:8080"
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+volumes:
+  postgres_data:
