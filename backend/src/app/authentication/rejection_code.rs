@@ -1,6 +1,6 @@
 use axum::http::StatusCode;
-use axum::Json;
 use axum::response::{IntoResponse, Response};
+use axum::Json;
 use serde::{Deserialize, Serialize};
 
 #[derive(Serialize, Deserialize, Debug)]
@@ -20,13 +20,9 @@ pub struct AuthRejection {
 impl IntoResponse for AuthRejectionCode {
     fn into_response(self) -> Response {
         let (status, message) = match self {
-            AuthRejectionCode::MissingSession => {
-                (StatusCode::UNAUTHORIZED, "Session cookie is missing")
-            }
+            AuthRejectionCode::MissingSession => (StatusCode::UNAUTHORIZED, "Session cookie is missing"),
             AuthRejectionCode::SessionExpired => (StatusCode::UNAUTHORIZED, "Session expired"),
-            AuthRejectionCode::DatabaseError => {
-                (StatusCode::INTERNAL_SERVER_ERROR, "Database error")
-            }
+            AuthRejectionCode::DatabaseError => (StatusCode::INTERNAL_SERVER_ERROR, "Database error"),
         };
 
         let body = Json(AuthRejection {
