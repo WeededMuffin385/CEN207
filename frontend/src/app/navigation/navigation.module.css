@@ -1,0 +1,68 @@
+.Navigation {
+    width: 100%;
+    border-bottom: solid white 2px;
+    padding: var(--space-md);
+
+    display: flex;
+    flex-direction: row;
+
+    h1 {
+        align-content: center;
+    }
+
+    .NavigationInner {
+        width: 100%;
+        max-width: 1600px;
+        margin-inline: auto;
+
+        gap: var(--space-md);
+
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+
+
+        .ButtonContainer {
+            height: 100%;
+            width: 64px;
+            justify-content: space-between;
+
+            padding: var(--space-sm);
+
+            display: flex;
+            flex-direction: column;
+
+            background: white;
+            border-radius: var(--radius-md);
+
+            p {
+                text-align: center;
+                white-space: normal;
+                color: black;
+                margin: 0;
+            }
+
+            .Icon {
+                height: 50%;
+                width: auto;
+                color: black;
+            }
+
+            p,
+            .Icon {
+                transition: color 0.2s ease;
+            }
+
+            transition: background-color 0.2s ease;
+
+            &:hover {
+                background: var(--color-bg);
+
+                p,
+                .Icon {
+                    color: var(--color-text);
+                }
+            }
+        }
+    }
+}
