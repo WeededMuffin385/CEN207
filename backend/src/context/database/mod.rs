@@ -65,7 +65,7 @@ impl Database {
             SELECT account_id
             FROM account_identities
             WHERE provider = $1
-            AND provider_account_id = $2
+            AND provider_account_id = $2 
         "#,
             AccountIdentityProvider::Google as AccountIdentityProvider,
             id
@@ -84,7 +84,7 @@ impl Database {
                     INSERT INTO account_identities (
                         account_id,
                         provider,
-                        provider_account_id
+                        provider_account_id  
                     )
                     VALUES ($1, $2, $3)
                 "#,
@@ -110,7 +110,7 @@ impl Database {
                     r#"
                     INSERT INTO accounts (name)
                     VALUES ($1)
-                    RETURNING id
+                    RETURNING id 
                 "#,
                     name
                 )
@@ -139,7 +139,7 @@ impl Database {
                 $1,
                 $2,
                 NOW() + INTERVAL '30 days'
-            )
+            ) 
         "#,
             session_token,
             account_id
@@ -160,7 +160,7 @@ impl Database {
             SELECT account_id
             FROM account_sessions
             WHERE token = $1
-            AND expires_at > NOW()
+            AND expires_at > NOW() 
         "#,
             &session_token
         )
