@@ -15,7 +15,6 @@ CREATE TABLE account_sessions
 
 CREATE TYPE account_identity_provider AS ENUM (
     'google',
-    'steam',
     'guest'
 );
 

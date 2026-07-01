@@ -1,0 +1,57 @@
+.Search {
+    flex: 1;
+    height: 100%;
+
+    font-size: 2rem;
+    border-radius: var(--radius-md);
+    border: none;
+    align-content: center;
+
+    background: white;
+
+    display: flex;
+    flex-direction: row;
+
+    .Input {
+        width: 0;
+        min-width: 0;
+        flex: 1;
+        height: 100%;
+
+
+        background: white;
+
+        color: black;
+
+        padding: var(--space-sm);
+        border-radius: var(--radius-md);
+        border: none;
+        align-content: center;
+
+        &,
+        &:focus {
+            outline: none;
+        }
+    }
+
+    .Icon {
+        padding: var(--space-sm);
+        margin: var(--space-sm);
+
+        border-radius: var(--radius-sm);
+
+
+        height: auto;
+        width: auto;
+
+        transition: color 0.2s ease;
+        color: darkgray;
+        &:hover {
+            color: black;
+        }
+
+        &.SearchIcon {
+            background: pink;
+        }
+    }
+}
