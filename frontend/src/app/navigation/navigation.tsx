@@ -1,23 +1,40 @@
 import styles from './navigation.module.css'
-import {ShoppingCart, User} from "lucide-react"
+import {LogIn, ShoppingCart, User} from "lucide-react"
 import SearchComponent from "./search/search.tsx"
 import {useNavigate} from "react-router";
+import {useAuth} from "../../auth_provider/auth_hook.tsx";
 
 export default function Navigation() {
+    const {isLoading, isAuthenticated} = useAuth();
     const navigate = useNavigate();
+
+    if (isLoading) {
+        return (
+            <div className={styles.Navigation}>
+                <header>Loading...</header>
+            </div>
+        );
+    }
 
     return (
         <div className={styles.Navigation}>
             <div className={styles.NavigationInner}>
-
                 <h1>Nightberries</h1>
 
                 <SearchComponent/>
 
-                <div className={styles.ButtonContainer} onClick={() => navigate("/auth")}>
-                    <User className={styles.Icon}/>
-                    <p>login</p>
-                </div>
+                {isAuthenticated ? (
+                    <div className={styles.ButtonContainer} onClick={() => navigate("/profile")}>
+                        <User className={styles.Icon}/>
+                        <p>login</p>
+                    </div>
+                ) : (
+                    <div className={styles.ButtonContainer} onClick={() => navigate("/auth")}>
+                        <LogIn className={styles.Icon}/>
+                        <p>login</p>
+                    </div>
+                )}
+
 
                 <div className={styles.ButtonContainer}>
                     <ShoppingCart className={styles.Icon}/>

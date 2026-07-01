@@ -8,7 +8,7 @@ log() {
   echo "==> $*"
 }
 
-SCHEMA_FILE_PATH="database/schema.sql"
+SCHEMA_FILE_PATH="assets/database/schema.sql"
 SCHEMA_PATH="database/schema"
 
 MIGRATION_DIFF_PATH="assets/database/migrations"
@@ -24,8 +24,8 @@ docker compose up -d postgres
 log "Waiting for Postgres"
 until docker compose exec postgres pg_isready -U admin; do sleep 1; done
 
-bash scripts/database/generate.sh "$SCHEMA_PATH" "$SCHEMA_FILE_PATH"
-bash scripts/database/validate.sh "$SCHEMA_FILE_PATH"
+bash scripts/database/utils/generate.sh "$SCHEMA_PATH" "$SCHEMA_FILE_PATH"
+bash scripts/database/utils/validate.sh "$SCHEMA_FILE_PATH"
 
 log "Generating migration plan"
 

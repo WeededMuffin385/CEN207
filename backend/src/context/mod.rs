@@ -7,6 +7,7 @@ use tracing::info;
 use crate::context::database::config::DatabaseConfig;
 use crate::context::database::Database;
 use crate::context::deployment_profile::{deployment_profile_from_env, DeploymentProfile};
+use crate::context::google::config::GoogleConfig;
 use crate::context::google::Google;
 
 #[derive(Clone)]
@@ -33,9 +34,15 @@ impl InnerContext {
             DeploymentProfile::Local => DatabaseConfig::local(),
             DeploymentProfile::LocalAws => DatabaseConfig::local_aws().await.unwrap(),
         };
+        
+        let google_config = match deployment_profile {
+            DeploymentProfile::Aws => GoogleConfig::aws().await,
+            DeploymentProfile::Local => GoogleConfig::local(),
+            DeploymentProfile::LocalAws => GoogleConfig::local(),
+        };
 
         let database = Database::new(db_config).await;
-        let google = Google::new().await;
+        let google = Google::new(google_config).await;
 
         Self {
             database,

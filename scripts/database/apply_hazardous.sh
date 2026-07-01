@@ -8,7 +8,7 @@ log() {
   echo "==> $*"
 }
 
-SCHEMA_FILE_PATH="database/schema.sql"
+SCHEMA_FILE_PATH="assets/database/schema.sql"
 SCHEMA_PATH="database/schema"
 
 DATABASE_URL="postgres://admin:secret@localhost:5432/postgres"

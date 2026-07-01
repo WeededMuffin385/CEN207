@@ -4,8 +4,8 @@ use crate::context::database::config::DatabaseConfig;
 use rand::Rng;
 use serde::{Deserialize, Serialize};
 use sha2::{Digest, Sha256};
-use sqlx::{PgPool, Postgres, Transaction};
 use sqlx::postgres::{PgConnectOptions, PgPoolOptions, PgSslMode};
+use sqlx::{PgPool, Postgres, Transaction};
 use std::time::Duration;
 use tokio::time::sleep;
 use tracing::info;
@@ -57,7 +57,7 @@ pub enum AccountIdentityProvider {
 }
 
 impl Database {
-    pub async fn google_authenticate(&self, id: &str, name: &str) -> i64 {
+    pub async fn google_auth(&self, id: &str, name: &str) -> i64 {
         let mut tx = self.pool.begin().await.unwrap();
 
         let account_id = sqlx::query_scalar!(
@@ -107,16 +107,16 @@ impl Database {
 
     pub async fn create_account(&self, tx: &mut Transaction<'_, Postgres>, name: &str) -> i64 {
         let account_id = sqlx::query_scalar!(
-                    r#"
+            r#"
                     INSERT INTO accounts (name)
                     VALUES ($1)
                     RETURNING id 
                 "#,
-                    name
-                )
-            .fetch_one(&mut **tx)
-            .await
-            .unwrap();
+            name
+        )
+        .fetch_one(&mut **tx)
+        .await
+        .unwrap();
 
         account_id
     }
@@ -164,8 +164,8 @@ impl Database {
         "#,
             &session_token
         )
-            .fetch_optional(&self.pool)
-            .await?;
+        .fetch_optional(&self.pool)
+        .await?;
 
         Ok(account_id)
     }

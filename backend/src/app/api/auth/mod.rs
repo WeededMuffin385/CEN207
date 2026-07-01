@@ -1,3 +1,5 @@
+mod google;
+
 use axum::extract::State;
 use axum::{Json, Router};
 use axum::http::StatusCode;
@@ -14,8 +16,8 @@ use crate::context::Context;
 pub fn router() -> Router<Context> {
     Router::new()
         .route("/session", get(check_session))
-        .route("/google", post(auth_google))
         .route("/guest", post(auth_guest))
+        .nest("/google", google::router())
 }
 
 async fn check_session(
@@ -25,38 +27,6 @@ async fn check_session(
     StatusCode::OK.into_response()
 }
 
-#[derive(Deserialize)]
-struct AuthGoogleRequest {
-    token: String,
-}
-
-async fn auth_google(
-    State(state): State<Context>,
-    jar: CookieJar,
-    Json(request): Json<AuthGoogleRequest>
-) -> Response {
-    let Ok(claims) = state.0.google.verify(&request.token) else {
-        return StatusCode::UNAUTHORIZED.into_response();
-    };
-
-    let id = &claims.sub;
-    let name = if let Some(name) = &claims.name {name} else {"newbie"};
-
-    let account_id = state.0.database.google_authenticate(id, name).await;
-    let session_token = state.0.database.create_session_token(account_id).await;
-
-    let jar = jar.add(
-        // TODO: fix the problem with local environment and secure=false
-        Cookie::build((SESSION_TOKEN_COOKIE_NAME, session_token))
-            .path("/")
-            .secure(false)
-            .http_only(true)
-            .same_site(SameSite::Lax)
-            .max_age(Duration::days(30))
-    );
-
-    (jar, StatusCode::OK).into_response()
-}
 
 async fn auth_guest(
     State(state): State<Context>,

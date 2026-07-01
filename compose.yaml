@@ -33,6 +33,8 @@ services:
     depends_on:
       postgres:
         condition: service_healthy
+    volumes:
+      - ./assets:/assets
 
 volumes:
   postgres_data:
