@@ -8,6 +8,7 @@ use axum::routing::{get, post};
 use axum_extra::extract::cookie::{Cookie, SameSite};
 use axum_extra::extract::CookieJar;
 use serde::Deserialize;
+use serde_json::json;
 use time::Duration;
 use crate::app::authentication::{Authentication, SESSION_TOKEN_COOKIE_NAME};
 use crate::context::Context;
@@ -24,7 +25,14 @@ async fn check_session(
     State(state): State<Context>,
     authentication: Authentication,
 ) -> Response {
-    StatusCode::OK.into_response()
+    let data = json!({
+        "user": {
+            "id": authentication.account_id,
+            "name": "noname"
+        }
+    });
+    
+    Json(data).into_response()
 }
 
 

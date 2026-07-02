@@ -1,0 +1,12 @@
+.Carts {
+    flex: 1;
+
+    overflow-y: hidden;
+
+    display: flex;
+    flex-direction: row;
+
+    gap: 2px;
+
+    background-color: var(--color-text);
+}

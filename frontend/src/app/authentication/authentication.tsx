@@ -15,9 +15,12 @@ export default function Authentication() {
                     onClick={() => {
                         window.location.href = "/api/auth/google";
                     }}
-                ><FcGoogle className={styles.Icon}/>Sign in with Google</button>
+                ><FcGoogle className={styles.Icon}/>Sign in with Google
+                </button>
 
-                <button onClick={() => navigate("/")}><IoMdExit className={styles.Icon}/> Return back</button>
+                <button onClick={() => navigate("/")}>
+                    <IoMdExit className={styles.Icon}/> Return back
+                </button>
             </div>
         </div>
     )

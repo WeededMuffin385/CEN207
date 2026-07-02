@@ -1,0 +1,38 @@
+.CartListItem {
+    display: flex;
+    flex-direction: row;
+
+    align-items: center;
+
+    h2 {
+        flex: 1;
+        display: flex;
+
+        align-items: center;
+        justify-content: start;
+
+        padding: var(--space-md);
+        text-overflow: ellipsis;
+
+        height: 100%;
+
+        &:hover {
+            color: var(--color-bg);
+            background-color: var(--color-text);
+        }
+
+        border-top-right-radius: var(--radius-md);
+        border-bottom-right-radius: var(--radius-md);
+    }
+
+    button {
+        height: 100%;
+        aspect-ratio: 1 / 1;
+        align-self: stretch;
+
+        flex: 0;
+        border: none;
+
+        border-radius: var(--radius-md);
+    }
+}

@@ -15,7 +15,7 @@ axum = { version = "0.8.9", features = ["json", "ws"] }
 axum-extra = { version = "0.12.6", features = ["cookie", "typed-header"] }
 
 tokio = { version = "1.52.3", features = ["full", "signal"] }
-sqlx = { version = "0.9.0", features = ["postgres", "tls-rustls-aws-lc-rs", "runtime-tokio", "macros", "uuid", "ipnet"] }
+sqlx = { version = "0.9.0", features = ["postgres", "tls-rustls-aws-lc-rs", "runtime-tokio", "macros", "uuid", "ipnet", "time"] }
 
 tower-http = { version = "0.6.11", features = ["trace", "sensitive-headers"] }
 tracing = "0.1.44"

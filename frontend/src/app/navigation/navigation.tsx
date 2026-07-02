@@ -19,14 +19,14 @@ export default function Navigation() {
     return (
         <div className={styles.Navigation}>
             <div className={styles.NavigationInner}>
-                <h1>Nightberries</h1>
+                <h1 onClick={() => navigate("/catalog")}>Nightberries</h1>
 
                 <SearchComponent/>
 
                 {isAuthenticated ? (
                     <div className={styles.ButtonContainer} onClick={() => navigate("/profile")}>
                         <User className={styles.Icon}/>
-                        <p>login</p>
+                        <p>profile</p>
                     </div>
                 ) : (
                     <div className={styles.ButtonContainer} onClick={() => navigate("/auth")}>
@@ -36,9 +36,9 @@ export default function Navigation() {
                 )}
 
 
-                <div className={styles.ButtonContainer}>
+                <div className={styles.ButtonContainer} onClick={() => navigate("/carts")}>
                     <ShoppingCart className={styles.Icon}/>
-                    <p>cart</p>
+                    <p>carts</p>
                 </div>
             </div>
         </div>

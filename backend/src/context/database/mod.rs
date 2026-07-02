@@ -1,5 +1,6 @@
 pub mod config;
 
+use std::collections::HashMap;
 use crate::context::database::config::DatabaseConfig;
 use rand::Rng;
 use serde::{Deserialize, Serialize};
@@ -9,6 +10,7 @@ use sqlx::{PgPool, Postgres, Transaction};
 use std::time::Duration;
 use tokio::time::sleep;
 use tracing::info;
+use uuid::Uuid;
 
 pub struct Database {
     pub pool: PgPool,
@@ -169,4 +171,74 @@ impl Database {
 
         Ok(account_id)
     }
+
+    pub async fn get_carts(
+        &self,
+        account_id: i64,
+    ) -> sqlx::Result<Vec<Cart>> {
+        let rows = sqlx::query!(r#"
+            SELECT
+                id,
+                name,
+                product_id as "product_id?",
+                quantity as "quantity?"
+            FROM account_carts
+            LEFT JOIN account_cart_items ON cart_id = id
+            WHERE account_id = $1
+            ORDER BY account_carts.created_at, account_cart_items.created_at 
+        "#, account_id).fetch_all(&self.pool).await?;
+
+        let mut carts_by_id: HashMap<Uuid, Cart> = HashMap::new();
+
+        for row in rows {
+            let cart = carts_by_id.entry(row.id).or_insert_with(||Cart {
+                id: row.id,
+                name: row.name,
+                items: Vec::new(),
+            });
+
+            if let (Some(product_id), Some(quantity)) = (row.product_id, row.quantity) {
+                cart.items.push(CartItem{
+                    product_id,
+                    quantity,
+                })
+            }
+        }
+
+        Ok(carts_by_id.into_values().collect())
+    }
+
+    pub async fn create_cart(
+        &self,
+        account_id: i64,
+        cart_name: &str,
+    ) -> Cart {
+        let row = sqlx::query!(r#"
+            INSERT INTO account_carts (
+                account_id,
+                name
+            ) VALUES ($1, $2) RETURNING *
+        "#, account_id, cart_name).fetch_one(&self.pool).await.unwrap();
+
+        Cart {
+            id: row.id,
+            name: row.name,
+            items: Vec::new(),
+        }
+    }
+}
+
+#[derive(Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct Cart {
+    pub id: Uuid,
+    pub name: String,
+    pub items: Vec<CartItem>,
+}
+
+#[derive(Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct CartItem {
+    product_id: Uuid,
+    quantity: i32,
 }
