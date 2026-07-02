@@ -2,23 +2,37 @@
     display: flex;
     flex-direction: row;
 
-    align-items: center;
+    align-items: stretch;
+    min-width: 0;
+
+    overflow: hidden;
+    flex-shrink: 0;
+
+    &:has(h2:hover) {
+        overflow: visible;
+    }
 
     h2 {
-        flex: 1;
-        display: flex;
+        transition: background-color 0.3s ease, color 0.3s ease;
 
-        align-items: center;
-        justify-content: start;
+        flex: 1;
+        min-width: 0;
+        display: block;
+        height: 100%;
 
         padding: var(--space-md);
-        text-overflow: ellipsis;
 
-        height: 100%;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
 
         &:hover {
             color: var(--color-bg);
             background-color: var(--color-text);
+
+            overflow: visible;
+            white-space: nowrap;
+            text-overflow: clip;
         }
 
         border-top-right-radius: var(--radius-md);
@@ -34,5 +48,12 @@
         border: none;
 
         border-radius: var(--radius-md);
+    }
+
+    &.Active {
+        h2 {
+            color: var(--color-bg);
+            background-color: var(--color-text);
+        }
     }
 }

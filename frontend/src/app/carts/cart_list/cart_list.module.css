@@ -10,23 +10,15 @@
     display: flex;
     flex-direction: column;
 
-    overflow-y: hidden;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    max-height: 100%;
 
-
-    .CartListContainer {
-        display: flex;
-        flex-direction: column;
-
-        overflow-y: scroll;
-        overflow-x: hidden;
-        max-height: 100%;
-
-
-/*        .Item {
-            text-align: center;
-            width: 100%;
-            border-bottom: solid 2px var(--color-text);
-        }*/
+    .CreateCartButton {
+        background-color: var(--color-bg);
+        position: sticky;
+        top: 0;
+        border-bottom: solid var(--color-text) 2px;
     }
 
     button {
@@ -38,9 +30,12 @@
 
         display: flex;
         flex-direction: row;
+
+        align-items: center;
+
         gap: var(--space-sm);
 
-        border-bottom: solid white 2px;
+
 
         transition: background-color 0.2s ease, border 0.2s ease, color 0.2s ease;
         &:hover {

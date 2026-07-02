@@ -3,8 +3,13 @@
     border-bottom: solid var(--color-text) 2px;
     padding: var(--space-md);
 
+    position: sticky;
+    top: 0;
+
     display: flex;
     flex-direction: row;
+
+    background-color: var(--color-bg);
 
     h1 {
         align-content: center;

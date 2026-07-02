@@ -12,13 +12,11 @@ export default function CartList(props: Props) {
 
     return (
         <div className={styles.CartList}>
-            <button onClick={() => props.onCreateNewCart()}><PackagePlus />create new cart</button>
+            <button className={styles.CreateCartButton} onClick={() => props.onCreateNewCart()}><PackagePlus />create new cart</button>
 
-            <div className={styles.CartListContainer}>
-                {carts.map((cart) => (
-                    <CartListItem key={cart.id} cartName={cart.name} />
-                ))}
-            </div>
+            {carts.map((cart) => (
+                <CartListItem key={cart.id} cartId={cart.id} cartName={cart.name} />
+            ))}
         </div>
     )
 }
