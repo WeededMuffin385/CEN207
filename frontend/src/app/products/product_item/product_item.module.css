@@ -1,0 +1,35 @@
+.ProductItem {
+    height: calc(256px * 1.5);
+
+    background-color: var(--color-bg-surface);
+    border-radius: var(--radius-md);
+
+    display: flex;
+    flex-direction: column;
+
+    gap: var(--space-sm);
+
+    img {
+        flex: 1;
+    }
+
+    .Info {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+
+        gap: var(--space-sm);
+
+        h2 {
+            font-size: 1rem;
+            display: flex;
+            flex-direction: row;
+
+            align-items: center;
+        }
+
+        .Reviews {
+            color: var(--color-text-muted);
+        }
+    }
+}

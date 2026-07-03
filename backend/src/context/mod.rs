@@ -1,6 +1,7 @@
 mod database;
 mod google;
 mod deployment_profile;
+mod storage;
 
 use std::sync::Arc;
 use tracing::info;

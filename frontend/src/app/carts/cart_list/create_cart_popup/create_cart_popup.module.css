@@ -24,10 +24,10 @@
         padding: var(--space-md);
         gap: var(--space-md);
 
-        border: solid var(--color-text) 2px;
+        border: solid var(--color-text-main) 2px;
         border-radius: var(--radius-md);
 
-        background-color: var(--color-bg);
+        background-color: var(--color-bg-main);
 
 
         display: flex;
@@ -40,7 +40,7 @@
 
 
         button {
-            border: solid var(--color-text) 2px;
+            border: solid var(--color-text-main) 2px;
             border-radius: var(--radius-md);
             width: 100%;
 
@@ -55,10 +55,10 @@
 
             transition: background-color 0.2s ease, border 0.2s ease, color 0.2s ease;
             &:hover {
-                background-color: var(--color-text);
-                border: solid var(--color-text) 2px;
+                background-color: var(--color-text-main);
+                border: solid var(--color-text-main) 2px;
 
-                color: var(--color-bg);
+                color: var(--color-bg-main);
             }
 
             .Icon {

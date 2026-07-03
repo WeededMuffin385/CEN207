@@ -27,8 +27,8 @@
         text-overflow: ellipsis;
 
         &:hover {
-            color: var(--color-bg);
-            background-color: var(--color-text);
+            color: var(--color-bg-main);
+            background-color: var(--color-text-main);
 
             overflow: visible;
             white-space: nowrap;
@@ -52,8 +52,8 @@
 
     &.Active {
         h2 {
-            color: var(--color-bg);
-            background-color: var(--color-text);
+            color: var(--color-bg-main);
+            background-color: var(--color-text-main);
         }
     }
 }

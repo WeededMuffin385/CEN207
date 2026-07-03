@@ -4,5 +4,5 @@
     flex-direction: column;
     align-items: center;
 
-    border-top: solid var(--color-text) 2px;
+    border-top: solid var(--color-text-main) 2px;
 }

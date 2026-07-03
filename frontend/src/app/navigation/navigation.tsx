@@ -19,7 +19,7 @@ export default function Navigation() {
     return (
         <div className={styles.Navigation}>
             <div className={styles.NavigationInner}>
-                <h1 onClick={() => navigate("/catalog")}>Nightberries</h1>
+                <h1 onClick={() => navigate("/products")}>Nightberries</h1>
 
                 <SearchComponent/>
 

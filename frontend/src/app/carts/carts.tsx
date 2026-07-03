@@ -5,7 +5,7 @@ import {useState} from "react";
 import {useCarts} from "../../carts_provider/carts_hook.tsx";
 import {Route, Routes} from "react-router";
 import Cart from "./cart/cart.tsx";
-import CartPlaceholder from "./cart_placeholder/cart_placeholder.tsx";
+import CartPlaceholder from "./cart/cart_placeholder.tsx";
 
 export default function Carts() {
     const {createCart} = useCarts();

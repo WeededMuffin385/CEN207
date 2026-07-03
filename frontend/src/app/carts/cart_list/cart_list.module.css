@@ -2,7 +2,7 @@
     flex: 1;
     min-width: 256px;
 
-    background-color: var(--color-bg);
+    background-color: var(--color-bg-main);
 
     border-top-right-radius: var(--radius-md);
     border-bottom-right-radius: var(--radius-md);
@@ -16,10 +16,10 @@
     max-height: 100%;
 
     .CreateCartButton {
-        background-color: var(--color-bg);
+        background-color: var(--color-bg-main);
         position: sticky;
         top: 0;
-        border-bottom: solid var(--color-text) 2px;
+        border-bottom: solid var(--color-text-main) 2px;
     }
 
     button {
@@ -40,8 +40,8 @@
 
         transition: background-color 0.2s ease, border 0.2s ease, color 0.2s ease;
         &:hover {
-            background-color: var(--color-text);
-            color: var(--color-bg);
+            background-color: var(--color-text-main);
+            color: var(--color-bg-main);
         }
 
         .Icon {
