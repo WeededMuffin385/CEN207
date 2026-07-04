@@ -2,7 +2,7 @@ import styles from './navigation.module.css'
 import {LogIn, ShoppingCart, User} from "lucide-react"
 import SearchComponent from "./search/search.tsx"
 import {useNavigate} from "react-router";
-import {useAuth} from "../../auth_provider/auth_hook.tsx";
+import {useAuth} from "../../providers/auth/auth_hook.tsx";
 
 export default function Navigation() {
     const {isLoading, isAuthenticated} = useAuth();

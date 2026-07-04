@@ -2,7 +2,7 @@ import styles from './carts.module.css'
 import CartList from "./cart_list/cart_list.tsx";
 import CreateCartPopup from "./cart_list/create_cart_popup/create_cart_popup.tsx";
 import {useState} from "react";
-import {useCarts} from "../../carts_provider/carts_hook.tsx";
+import {useCarts} from "../../providers/carts/carts_hook.tsx";
 import {Route, Routes} from "react-router";
 import Cart from "./cart/cart.tsx";
 import CartPlaceholder from "./cart/cart_placeholder.tsx";

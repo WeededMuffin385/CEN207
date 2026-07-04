@@ -1,29 +1,37 @@
 CREATE TABLE products
 (
-    id             UUID PRIMARY KEY     DEFAULT gen_random_uuid(),
+    id          UUID PRIMARY KEY     DEFAULT gen_random_uuid(),
 
-    name           TEXT        NOT NULL,
-    description    TEXT,
+    title       TEXT        NOT NULL,
+    description TEXT        NOT NULL,
 
     -- price is calculated in cents
-    price          BIGINT      NOT NULL CHECK (price >= 0),
-    currency       CHAR(3)     NOT NULL DEFAULT 'AUD',
+    price       BIGINT      NOT NULL CHECK (price >= 0),
+    currency    CHAR(3)     NOT NULL DEFAULT 'AUD',
 
-    stock_quantity INT         NOT NULL DEFAULT 0 CHECK (stock_quantity >= 0),
-    is_active      BOOLEAN     NOT NULL DEFAULT TRUE,
+    rating      REAL        NOT NULL DEFAULT 0 CHECK ( rating >= 0 AND rating <= 5 ),
+    reviews     INTEGER     NOT NULL DEFAULT 0,
 
-    created_at     TIMESTAMPTZ NOT NULL DEFAULT now(),
-    updated_at     TIMESTAMPTZ NOT NULL DEFAULT now()
+    is_active   BOOLEAN     NOT NULL DEFAULT TRUE,
+
+    created_at  TIMESTAMPTZ NOT NULL DEFAULT now(),
+    updated_at  TIMESTAMPTZ NOT NULL DEFAULT now()
 );
 
-CREATE TABLE product_reservations
+
+CREATE TABLE product_reviews
 (
-    product_id UUID REFERENCES products (id),
-    account_id BIGINT REFERENCES accounts (id),
-    quantity   BIGINT      NOT NULL,
+    id         UUID PRIMARY KEY     DEFAULT gen_random_uuid(),
+
+    product_id UUID        NOT NULL REFERENCES products (id),
+    account_id UUID        NOT NULL REFERENCES accounts (id),
+
+    rating     REAL        NOT NULL CHECK ( rating BETWEEN 0 AND 5),
+    title      TEXT,
+    body       TEXT,
 
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
-    expires_at TIMESTAMPTZ NOT NULL DEFAULT now() + INTERVAL '15 minutes',
+    updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
 
-    PRIMARY KEY (product_id, account_id)
+    unique (product_id, account_id)
 );

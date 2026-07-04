@@ -1,12 +1,13 @@
 pub mod config;
 
-use std::collections::HashMap;
 use crate::context::database::config::DatabaseConfig;
+use chrono::{DateTime, Utc};
 use rand::Rng;
 use serde::{Deserialize, Serialize};
 use sha2::{Digest, Sha256};
 use sqlx::postgres::{PgConnectOptions, PgPoolOptions, PgSslMode};
 use sqlx::{PgPool, Postgres, Transaction};
+use std::collections::HashMap;
 use std::time::Duration;
 use tokio::time::sleep;
 use tracing::info;
@@ -59,7 +60,7 @@ pub enum AccountIdentityProvider {
 }
 
 impl Database {
-    pub async fn google_auth(&self, id: &str, name: &str) -> i64 {
+    pub async fn google_auth(&self, id: &str, name: &str) -> Uuid {
         let mut tx = self.pool.begin().await.unwrap();
 
         let account_id = sqlx::query_scalar!(
@@ -107,7 +108,7 @@ impl Database {
         account_id
     }
 
-    pub async fn create_account(&self, tx: &mut Transaction<'_, Postgres>, name: &str) -> i64 {
+    pub async fn create_account(&self, tx: &mut Transaction<'_, Postgres>, name: &str) -> Uuid {
         let account_id = sqlx::query_scalar!(
             r#"
                     INSERT INTO accounts (name)
@@ -123,7 +124,7 @@ impl Database {
         account_id
     }
 
-    pub async fn create_session_token(&self, account_id: i64) -> String {
+    pub async fn create_session_token(&self, account_id: Uuid) -> String {
         let mut session_token_bytes = [0; 32];
         rand::rngs::ThreadRng::default().fill_bytes(&mut session_token_bytes);
 
@@ -156,7 +157,7 @@ impl Database {
     pub async fn get_account_id_by_session_token(
         &self,
         session_token: Vec<u8>,
-    ) -> Result<Option<i64>, sqlx::Error> {
+    ) -> Result<Option<Uuid>, sqlx::Error> {
         let account_id = sqlx::query_scalar!(
             r#"
             SELECT account_id
@@ -172,33 +173,35 @@ impl Database {
         Ok(account_id)
     }
 
-    pub async fn get_carts(
-        &self,
-        account_id: i64,
-    ) -> sqlx::Result<Vec<Cart>> {
-        let rows = sqlx::query!(r#"
+    pub async fn get_carts(&self, account_id: Uuid) -> sqlx::Result<Vec<Cart>> {
+        let rows = sqlx::query!(
+            r#"
             SELECT
                 id,
                 name,
                 product_id as "product_id?",
                 quantity as "quantity?"
-            FROM account_carts
-            LEFT JOIN account_cart_items ON cart_id = id
-            WHERE account_id = $1
-            ORDER BY account_carts.created_at, account_cart_items.created_at 
-        "#, account_id).fetch_all(&self.pool).await?;
+            FROM carts
+            LEFT JOIN cart_products ON cart_id = id
+            WHERE created_by = $1
+            ORDER BY carts.created_at, cart_products.created_at
+        "#,
+            account_id
+        )
+        .fetch_all(&self.pool)
+        .await?;
 
         let mut carts_by_id: HashMap<Uuid, Cart> = HashMap::new();
 
         for row in rows {
-            let cart = carts_by_id.entry(row.id).or_insert_with(||Cart {
+            let cart = carts_by_id.entry(row.id).or_insert_with(|| Cart {
                 id: row.id,
                 name: row.name,
                 items: Vec::new(),
             });
 
             if let (Some(product_id), Some(quantity)) = (row.product_id, row.quantity) {
-                cart.items.push(CartItem{
+                cart.items.push(CartItem {
                     product_id,
                     quantity,
                 })
@@ -208,23 +211,67 @@ impl Database {
         Ok(carts_by_id.into_values().collect())
     }
 
-    pub async fn create_cart(
-        &self,
-        account_id: i64,
-        cart_name: &str,
-    ) -> Cart {
-        let row = sqlx::query!(r#"
-            INSERT INTO account_carts (
-                account_id,
+    pub async fn create_cart(&self, account_id: Uuid, cart_name: &str) -> Cart {
+        let row = sqlx::query!(
+            r#"
+            INSERT INTO carts (
+                created_by,
                 name
             ) VALUES ($1, $2) RETURNING *
-        "#, account_id, cart_name).fetch_one(&self.pool).await.unwrap();
+        "#,
+            account_id,
+            cart_name
+        )
+        .fetch_one(&self.pool)
+        .await
+        .unwrap();
 
         Cart {
             id: row.id,
             name: row.name,
             items: Vec::new(),
         }
+    }
+
+    pub async fn get_products(
+        &self,
+        limit: i64,
+        product_id: Option<Uuid>,
+        created_at: Option<DateTime<Utc>>,
+    ) -> sqlx::Result<Vec<Product>> {
+        let rows = sqlx::query!(
+            r#"
+            SELECT *
+            FROM products
+            WHERE
+                ($1::TIMESTAMPTZ IS NULL OR (created_at, id) < ($1, $2))
+                AND is_active = true
+            ORDER BY created_at DESC, id DESC 
+            LIMIT $3
+        "#,
+            created_at,
+            product_id,
+            limit
+        )
+        .fetch_all(&self.pool)
+        .await?;
+
+        let products: Vec<_> = rows
+            .into_iter()
+            .map(|record| Product {
+                id: record.id,
+                title: record.title,
+                description: record.description,
+                price: record.price,
+                currency: record.currency,
+                rating: record.rating,
+                reviews: record.reviews,
+                created_at: record.created_at,
+                image_url: "".to_string(),
+            })
+            .collect();
+
+        Ok(products)
     }
 }
 
@@ -241,4 +288,23 @@ pub struct Cart {
 pub struct CartItem {
     product_id: Uuid,
     quantity: i32,
+}
+
+#[derive(Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct Product {
+    id: Uuid,
+
+    title: String,
+    description: String,
+
+    price: i64,
+    currency: String,
+
+    rating: f32,
+    reviews: i32,
+
+    created_at: DateTime<Utc>,
+
+    image_url: String,
 }

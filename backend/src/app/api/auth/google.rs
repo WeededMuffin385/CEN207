@@ -1,16 +1,15 @@
 use crate::app::authentication::SESSION_TOKEN_COOKIE_NAME;
 use crate::context::Context;
-use axum::Router;
 use axum::extract::{Query, State};
 use axum::response::{IntoResponse, Redirect, Response};
 use axum::routing::get;
-use axum_extra::extract::CookieJar;
+use axum::Router;
 use axum_extra::extract::cookie::{Cookie, SameSite};
+use axum_extra::extract::CookieJar;
 use axum_extra::headers::HeaderMap;
-use rand::RngExt;
 use rand::distr::Alphanumeric;
+use rand::RngExt;
 use serde::Deserialize;
-use std::time::Duration;
 use tracing::info;
 
 pub const GOOGLE_OAUTH_STATE_COOKIE_NAME: &str = "google_oauth_state";
@@ -38,7 +37,7 @@ async fn auth_google(State(state): State<Context>, jar: CookieJar) -> Response {
             .http_only(true)
             .secure(false)
             .same_site(SameSite::Lax)
-            .max_age(Duration::from_mins(30).try_into().unwrap()),
+            .max_age(time::Duration::minutes(30)),
     );
 
     (jar, Redirect::temporary(auth_url.as_str())).into_response()
@@ -89,7 +88,7 @@ async fn auth_google_callback(
             .http_only(true)
             .secure(true)
             .same_site(SameSite::Lax)
-            .max_age(time::Duration::days(1).try_into().unwrap()),
+            .max_age(time::Duration::days(14)),
     );
 
     let jar = jar.remove(Cookie::build(GOOGLE_OAUTH_STATE_COOKIE_NAME).path("/"));

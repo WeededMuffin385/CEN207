@@ -1,6 +1,6 @@
 import styles from './cart.module.css'
 import {useParams} from "react-router";
-import {useCarts} from "../../../carts_provider/carts_hook.tsx";
+import {useCarts} from "../../../providers/carts/carts_hook.tsx";
 
 export default function Cart(){
     const {carts} = useCarts()
