@@ -22,7 +22,7 @@ struct GetProductsQuery {
     created_at: Option<DateTime<Utc>>,
     limit: Option<i64>,
 
-    ids: Vec<Uuid>,
+    ids: Option<Vec<Uuid>>,
 }
 
 async fn get_products(
@@ -31,7 +31,7 @@ async fn get_products(
 ) -> Response {
     info!("Received ids: {:?}", query.ids);
 
-    let uses_ids = query.ids.is_empty().not();
+    let uses_ids = query.ids.as_ref().map_or_else(||false, |ids|ids.is_empty().not());
     let uses_cursor = query.product_id.is_some() || query.created_at.is_some();
 
     let limit = query.limit.unwrap_or(24).clamp(1, 48);
@@ -40,7 +40,7 @@ async fn get_products(
         _ if uses_ids && uses_cursor.not() => state
             .0
             .database
-            .get_products_by_ids(query.ids)
+            .get_products_by_ids(query.ids.unwrap())
             .await
             .unwrap(),
 
