@@ -16,7 +16,7 @@ CREATE TYPE cart_member_role AS enum (
 
 CREATE TABLE cart_members
 (
-    cart_id    UUID             NOT NULL REFERENCES carts (id),
+    cart_id    UUID             NOT NULL REFERENCES carts (id) ON DELETE CASCADE,
     account_id UUID             NOT NULL REFERENCES accounts (id),
 
     role       cart_member_role NOT NULL DEFAULT 'editor',

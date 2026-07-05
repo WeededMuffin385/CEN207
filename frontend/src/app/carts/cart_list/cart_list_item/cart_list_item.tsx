@@ -1,25 +1,30 @@
 import styles from './cart_list_item.module.css'
 import {Trash2} from "lucide-react";
-import {useMatch, useNavigate} from "react-router";
+import {useNavigate} from "react-router";
+import {useCarts} from "../../../../providers/carts/carts_hook.tsx";
 
 type Props = {
     cartId: string,
     cartName: string,
+
+    isActive: boolean,
+
+    onRemove: () => void
 }
 
 export default function CartListItem(props: Props) {
     const navigate = useNavigate()
-
-    const match = useMatch("/carts/:cartId");
-    const cartId = match?.params.cartId;
-
-    const isActive = cartId === props.cartId
+    const {selectCart} = useCarts()
 
     return (
-        <div className={`${styles.CartListItem} ${isActive ? styles.Active : ""}`}>
-            <h2 onClick={() => navigate(`/carts/${props.cartId}`)}>{props.cartName}</h2>
+        <div className={`${styles.CartListItem} ${props.isActive ? styles.Active : ""}`}>
+            <h3 onClick={() => {
+                selectCart(props.cartId)
 
-            <button><Trash2/></button>
+                navigate(`/carts/${props.cartId}`)
+            }}>{props.cartName}</h3>
+
+            <button onClick={() => props.onRemove()}><Trash2/></button>
         </div>
     )
 }

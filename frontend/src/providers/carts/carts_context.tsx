@@ -3,6 +3,7 @@ import {createContext} from "react";
 export type CartItem = {
     productId: string,
     quantity: number,
+
 }
 
 export type Cart = {

@@ -2,11 +2,16 @@ import styles from './products.module.css'
 import ProductItem from "./product_item/product_item.tsx";
 import {useProducts} from "../../hooks/products.tsx";
 import {useEffect, useMemo, useRef} from "react";
+import {useCarts} from "../../providers/carts/carts_hook.tsx";
 
 export default function Products() {
     const {
+        isLoading: cartsAreLoading,
+    } = useCarts();
+
+    const {
         data,
-        isLoading,
+        isLoading: productsAreLoading,
         isError,
         error,
         fetchNextPage,
@@ -49,7 +54,7 @@ export default function Products() {
         };
     }, [fetchNextPage, hasNextPage, isFetchingNextPage]);
 
-    if (isLoading) {
+    if (cartsAreLoading || productsAreLoading) {
         return (
             <div className={styles.Products}>
                 <h2>Loading in progress</h2>

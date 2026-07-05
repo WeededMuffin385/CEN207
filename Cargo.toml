@@ -12,7 +12,7 @@ anyhow = "1.0.102"
 reqwest = { version = "0.13.3", features = ["json", "rustls", "cookies", "form"] }
 
 axum = { version = "0.8.9", features = ["json", "ws"] }
-axum-extra = { version = "0.12.6", features = ["cookie", "typed-header"] }
+axum-extra = { version = "0.12.6", features = ["cookie", "typed-header", "query"] }
 time = "0.3.53"
 
 tokio = { version = "1.52.3", features = ["full", "signal"] }

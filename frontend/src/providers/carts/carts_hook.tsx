@@ -1,5 +1,5 @@
-import {useContext} from "react";
-import {CartsContext} from "./carts_context.tsx";
+import {useContext, useMemo} from "react";
+import {type CartItem, CartsContext} from "./carts_context.tsx";
 
 export function useCarts() {
     const context = useContext(CartsContext);
@@ -9,4 +9,26 @@ export function useCarts() {
     }
 
     return context;
+}
+
+
+export function useCurrentCartItem(productId: string): CartItem | null {
+    const { currentCart } = useCarts();
+
+    return useMemo(() => {
+        if (currentCart === null) {
+            return null;
+        }
+
+        return (
+            currentCart.items.find((item) => item.productId === productId) ??
+            null
+        );
+    }, [currentCart, productId]);
+}
+
+export function useCurrentCartProductQuantity(productId: string): number {
+    const cartItem = useCurrentCartItem(productId);
+
+    return cartItem?.quantity ?? 0;
 }

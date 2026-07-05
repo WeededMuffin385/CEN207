@@ -16,10 +16,15 @@
     max-height: 100%;
 
     .CreateCartButton {
+        font-size: var(--font-size-lg);
+        font-weight: var(--font-weight-md);
+
         background-color: var(--color-bg-main);
         position: sticky;
         top: 0;
-        border-bottom: solid var(--color-text-main) 2px;
+
+        border: solid var(--color-text-main) 2px;
+        border-left: none;
     }
 
     button {

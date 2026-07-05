@@ -1,4 +1,4 @@
-import styles from './create_cart_popup.module.css'
+import styles from '../popup.module.css'
 import {IoMdExit} from "react-icons/io";
 import {LayersPlus} from "lucide-react";
 import {useState} from "react";
@@ -12,8 +12,8 @@ export default function CreateCartPopup(props: Props) {
     const [cartName, setCartName] = useState("");
 
     return (
-        <div className={styles.CreateCartPopup}>
-            <div className={styles.CreateCartPopupInner}>
+        <div className={styles.Popup}>
+            <div className={styles.PopupInner}>
                 <h2>Create a new cart</h2>
 
                 <input className={styles.Input} placeholder="your cart name" value={cartName} onChange={(event) => setCartName(event.target.value)}/>

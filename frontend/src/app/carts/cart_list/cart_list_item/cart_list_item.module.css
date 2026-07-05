@@ -12,7 +12,10 @@
         overflow: visible;
     }
 
-    h2 {
+    h3 {
+        font-size: var(--font-size-lg);
+        font-weight: var(--font-weight-md);
+
         transition: background-color 0.3s ease, color 0.3s ease;
 
         flex: 1;
@@ -48,10 +51,13 @@
         border: none;
 
         border-radius: var(--radius-md);
+
+        justify-content: center;
+        align-items: center;
     }
 
     &.Active {
-        h2 {
+        h3 {
             color: var(--color-bg-main);
             background-color: var(--color-text-main);
         }

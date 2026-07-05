@@ -1,4 +1,4 @@
-.CreateCartPopup {
+.Popup {
     background-color: rgb(13 18 25 / 0.75);
 
     position: fixed;
@@ -17,7 +17,7 @@
     align-items: center;
     justify-content: center;
 
-    .CreateCartPopupInner {
+    .PopupInner {
         width: 640px;
         height: 480px;
 

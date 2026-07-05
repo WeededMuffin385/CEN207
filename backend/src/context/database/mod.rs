@@ -1,4 +1,6 @@
+mod carts;
 pub mod config;
+mod products;
 
 use crate::context::database::config::DatabaseConfig;
 use chrono::{DateTime, Utc};
@@ -173,106 +175,7 @@ impl Database {
         Ok(account_id)
     }
 
-    pub async fn get_carts(&self, account_id: Uuid) -> sqlx::Result<Vec<Cart>> {
-        let rows = sqlx::query!(
-            r#"
-            SELECT
-                id,
-                name,
-                product_id as "product_id?",
-                quantity as "quantity?"
-            FROM carts
-            LEFT JOIN cart_products ON cart_id = id
-            WHERE created_by = $1
-            ORDER BY carts.created_at, cart_products.created_at
-        "#,
-            account_id
-        )
-        .fetch_all(&self.pool)
-        .await?;
-
-        let mut carts_by_id: HashMap<Uuid, Cart> = HashMap::new();
-
-        for row in rows {
-            let cart = carts_by_id.entry(row.id).or_insert_with(|| Cart {
-                id: row.id,
-                name: row.name,
-                items: Vec::new(),
-            });
-
-            if let (Some(product_id), Some(quantity)) = (row.product_id, row.quantity) {
-                cart.items.push(CartItem {
-                    product_id,
-                    quantity,
-                })
-            }
-        }
-
-        Ok(carts_by_id.into_values().collect())
-    }
-
-    pub async fn create_cart(&self, account_id: Uuid, cart_name: &str) -> Cart {
-        let row = sqlx::query!(
-            r#"
-            INSERT INTO carts (
-                created_by,
-                name
-            ) VALUES ($1, $2) RETURNING *
-        "#,
-            account_id,
-            cart_name
-        )
-        .fetch_one(&self.pool)
-        .await
-        .unwrap();
-
-        Cart {
-            id: row.id,
-            name: row.name,
-            items: Vec::new(),
-        }
-    }
-
-    pub async fn get_products(
-        &self,
-        limit: i64,
-        product_id: Option<Uuid>,
-        created_at: Option<DateTime<Utc>>,
-    ) -> sqlx::Result<Vec<Product>> {
-        let rows = sqlx::query!(
-            r#"
-            SELECT *
-            FROM products
-            WHERE
-                ($1::TIMESTAMPTZ IS NULL OR (created_at, id) < ($1, $2))
-                AND is_active = true
-            ORDER BY created_at DESC, id DESC 
-            LIMIT $3
-        "#,
-            created_at,
-            product_id,
-            limit
-        )
-        .fetch_all(&self.pool)
-        .await?;
-
-        let products: Vec<_> = rows
-            .into_iter()
-            .map(|record| Product {
-                id: record.id,
-                title: record.title,
-                description: record.description,
-                price: record.price,
-                currency: record.currency,
-                rating: record.rating,
-                reviews: record.reviews,
-                created_at: record.created_at,
-                image_url: "".to_string(),
-            })
-            .collect();
-
-        Ok(products)
-    }
+    
 }
 
 #[derive(Serialize, Deserialize)]
