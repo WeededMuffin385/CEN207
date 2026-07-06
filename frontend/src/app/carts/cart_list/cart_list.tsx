@@ -17,11 +17,24 @@ export default function CartList(props: Props) {
 
     return (
         <div className={styles.CartList}>
-            <button className={styles.CreateCartButton} onClick={() => props.onCreateCart()}><PackagePlus />create new cart</button>
+            <button
+                className={styles.CreateCartButton}
+                onClick={() => props.onCreateCart()}
+            >
+                <PackagePlus/>create new cart
+            </button>
 
-            {carts.map((cart) => (
-                <CartListItem key={cart.id} cartId={cart.id} cartName={cart.name} isActive={selectedCartId == cart.id} onRemove={() => props.onRemoveCart(cart.id)}/>
-            ))}
+            <div className={styles.CartListContainer}>
+                {carts.map((cart) => (
+                    <CartListItem
+                        key={cart.id}
+                        cartId={cart.id}
+                        cartName={cart.name}
+                        isActive={selectedCartId == cart.id}
+                        onRemove={() => props.onRemoveCart(cart.id)}
+                    />
+                ))}
+            </div>
         </div>
     )
 }

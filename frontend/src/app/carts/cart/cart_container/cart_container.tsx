@@ -1,10 +1,10 @@
-import styles from './cart_list.module.css'
+import styles from './cart_container.module.css'
 import {useCarts} from "../../../../providers/carts/carts_hook.tsx";
 import {useParams} from "react-router";
 import {useProductsByIds} from "../../../../hooks/products_by_ids.tsx";
-import CartListItem from "./cart_list_item/cart_list_item.tsx";
+import CartContainerItem from "./cart_container_item/cart_container_item.tsx";
 
-export default function CartList() {
+export default function CartContainer() {
     const {carts} = useCarts()
     const {cartId} = useParams()
 
@@ -54,7 +54,7 @@ export default function CartList() {
     }
 
     return (
-        <div className={styles.CartList}>
+        <div className={styles.CartContainer}>
             {cart.items.map((item) => {
                 const product = productsById.get(item.productId);
 
@@ -66,7 +66,7 @@ export default function CartList() {
                     )
                 }
 
-                return <CartListItem key={item.productId} quantity={item.quantity} product={product}/>
+                return <CartContainerItem key={item.productId} quantity={item.quantity} product={product}/>
             })}
         </div>
     )

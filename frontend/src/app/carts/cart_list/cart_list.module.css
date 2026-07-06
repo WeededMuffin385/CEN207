@@ -2,7 +2,7 @@
     flex: 1;
     min-width: 256px;
 
-    background-color: var(--color-bg-main);
+    background: var(--color-text-main);
 
     border-top-right-radius: var(--radius-md);
     border-bottom-right-radius: var(--radius-md);
@@ -11,17 +11,33 @@
     flex-direction: column;
     align-content: center;
 
-    overflow-y: scroll;
+    overflow-y: hidden;
     overflow-x: hidden;
     max-height: 100%;
 
+    .CartListContainer {
+        background-color: var(--color-bg-main);
+
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+
+        border: solid var(--color-text-main) 2px;
+        border-left: none;
+
+        border-top-right-radius: var(--radius-md);
+        border-bottom-right-radius: var(--radius-md);
+
+        overflow-y: scroll;
+    }
+
     .CreateCartButton {
-        font-size: var(--font-size-lg);
+        font-size: var(--font-size-4xl);
         font-weight: var(--font-weight-md);
 
         background-color: var(--color-bg-main);
-        position: sticky;
-        top: 0;
+/*        position: sticky;
+        top: 0;*/
 
         border: solid var(--color-text-main) 2px;
         border-left: none;
@@ -42,8 +58,8 @@
         gap: var(--space-sm);
 
 
-
         transition: background-color 0.2s ease, border 0.2s ease, color 0.2s ease;
+
         &:hover {
             background-color: var(--color-text-main);
             color: var(--color-bg-main);

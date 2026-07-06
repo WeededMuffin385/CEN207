@@ -2,7 +2,7 @@ import styles from './cart.module.css'
 import Summary from './summary/summary.tsx'
 import {useCarts} from "../../../providers/carts/carts_hook.tsx";
 import {useParams} from "react-router";
-import CartList from "./cart_list/cart_list.tsx";
+import CartContainer from "./cart_container/cart_container.tsx";
 
 export default function Cart() {
     const {carts} = useCarts()
@@ -31,7 +31,7 @@ export default function Cart() {
             <h2>{cart.name}</h2>
 
             <div className={styles.CartInner}>
-                <CartList/>
+                <CartContainer/>
                 <Summary/>
             </div>
         </div>

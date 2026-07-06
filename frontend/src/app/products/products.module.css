@@ -9,9 +9,11 @@
     grid-template-columns: repeat(6, 1fr);
 
 
-    margin-block: var(--space-md);
     gap: var(--space-md);
     row-gap: calc(var(--space-lg) * 1.5);
+
+    overflow-y: scroll;
+
 }
 
 .LoadMoreTrigger {

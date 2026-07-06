@@ -1,10 +1,7 @@
-.CartItem {
+.CartContainerItem {
     display: flex;
     flex-direction: row;
     flex-shrink: 0;
-
-    justify-content: space-between;
-    align-items: start;
 
     img {
         height: 100%;
@@ -16,6 +13,7 @@
 
     overflow: hidden;
 
+    justify-content: space-between;
     align-items: end;
     border-radius: var(--radius-md);
     gap: var(--space-md);

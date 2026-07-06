@@ -1,4 +1,4 @@
-import styles from './cart_list_item.module.css'
+import styles from './cart_container_item.module.css'
 import type {Product} from "../../../../../hooks/products.tsx";
 import placeholder from '../../../../products/product_item/placeholder_dark.png'
 import {Minus, Plus, ShoppingCart, Trash2} from "lucide-react";
@@ -10,7 +10,7 @@ type Props = {
     product: Product,
 }
 
-export default function CartItem(props: Props) {
+export default function CartContainerItem(props: Props) {
     const {currentCartId, updateQuantity} = useCarts();
     const productId = props.product.id
     const quantity = props.quantity
@@ -30,7 +30,7 @@ export default function CartItem(props: Props) {
     }).format(props.product.price / 100);
 
     return (
-        <div className={styles.CartItem}>
+        <div className={styles.CartContainerItem}>
             <img src={placeholder} alt={""}/>
 
 

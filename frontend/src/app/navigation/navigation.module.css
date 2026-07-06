@@ -12,7 +12,7 @@
     background-color: var(--color-bg-main);
 
     h1 {
-        font-size: var(--font-size-xl);
+        font-size: var(--font-size-5xl);
         align-content: center;
 
         &:hover {
