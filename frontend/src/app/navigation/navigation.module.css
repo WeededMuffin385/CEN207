@@ -1,6 +1,5 @@
 .Navigation {
     width: 100%;
-    border-bottom: solid var(--color-text-main) 2px;
     padding: var(--space-md);
 
     position: sticky;

@@ -4,6 +4,9 @@
     flex-direction: column;
     overflow: hidden;
 
+    gap: var(--space-xs);
+    background-color: var(--color-text-main);
+
     h1 {
         text-align: center;
     }

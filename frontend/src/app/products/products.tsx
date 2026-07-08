@@ -68,20 +68,22 @@ export default function Products() {
 
     return (
         <div className={styles.Products}>
-            {products.map((product) => (
-                <ProductItem
-                    key={product.id}
-                    id={product.id}
-                    title={product.title}
-                    price={product.price}
-                    rating={product.rating}
-                    reviews={product.reviews}
-                    imageUrl={product.imageUrl}
-                />
-            ))}
+            <div className={styles.ProductsContainer}>
+                {products.map((product) => (
+                    <ProductItem
+                        key={product.id}
+                        id={product.id}
+                        title={product.title}
+                        price={product.price}
+                        rating={product.rating}
+                        reviews={product.reviews}
+                        imageUrl={product.imageUrl}
+                    />
+                ))}
 
-            <div ref={loadMoreRef} className={styles.LoadMoreTrigger}>
-                {isFetchingNextPage && <h2>Loading more products...</h2>}
+                <div ref={loadMoreRef} className={styles.LoadMoreTrigger}>
+                    {isFetchingNextPage && <h2>Loading more products...</h2>}
+                </div>
             </div>
         </div>
     );

@@ -11,8 +11,6 @@
     border-top-left-radius: var(--radius-md);
     border-bottom-left-radius: var(--radius-md);
 
-
-    border: solid var(--color-text-main) 2px;
     border-right: none;
 
     .Header {
@@ -27,6 +25,8 @@
         }
 
         button.SelectAddress {
+            align-items: baseline;
+
             display: flex;
             flex-direction: row;
             gap: var(--space-sm);
@@ -61,7 +61,6 @@
             font-size: var(--font-size-4xl);
             font-weight: var(--font-weight-md);
 
-            border: solid var(--color-text-main) 2px;
             border-radius: var(--radius-md);
             width: 100%;
 
@@ -78,7 +77,6 @@
 
             &:hover {
                 background-color: var(--color-text-main);
-                border: solid var(--color-text-main) 2px;
 
                 color: var(--color-bg-main);
             }
