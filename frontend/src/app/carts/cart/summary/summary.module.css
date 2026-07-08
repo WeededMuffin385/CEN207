@@ -34,7 +34,8 @@
         button.SelectAddress {
             grid-column: 1;
 
-            align-items: baseline;
+            justify-content: center;
+            align-items: center;
             display: flex;
             flex-direction: row;
             gap: var(--space-sm);

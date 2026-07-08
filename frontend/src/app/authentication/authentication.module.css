@@ -7,9 +7,12 @@
 
     flex: 1;
 
+    background-color: var(--color-bg-main);
+
     .AuthenticationInner {
         width: 640px;
         height: 480px;
+
 
         border: solid var(--color-text-main) 2px;
         border-radius: var(--radius-md);
