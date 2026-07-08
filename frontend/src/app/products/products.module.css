@@ -1,0 +1,28 @@
+.Products {
+    height: 100%;
+    width: 100%;
+    background-color: var(--color-bg-main);
+    overflow-y: hidden;
+
+    .ProductsContainer {
+        flex: 1;
+
+        height: 100%;
+        width: 100%;
+        max-width: 1600px;
+        margin-inline: auto;
+
+        display: grid;
+        grid-template-columns: repeat(6, 1fr);
+
+
+        gap: var(--space-md);
+        row-gap: calc(var(--space-lg) * 1.5);
+
+        overflow-y: scroll;
+    }
+}
+
+.LoadMoreTrigger {
+    min-height: 1px;
+}

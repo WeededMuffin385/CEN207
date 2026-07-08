@@ -1,0 +1,65 @@
+.CartListItem {
+    display: flex;
+    flex-direction: row;
+
+    align-items: stretch;
+    min-width: 0;
+
+    overflow: hidden;
+    flex-shrink: 0;
+
+    &:has(h2:hover) {
+        overflow: visible;
+    }
+
+    h3 {
+        font-size: var(--font-size-4xl);
+        font-weight: var(--font-weight-md);
+
+        transition: background-color 0.3s ease, color 0.3s ease;
+
+        flex: 1;
+        min-width: 0;
+        display: block;
+        height: 100%;
+
+        padding: var(--space-md);
+
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+
+        &:hover {
+            color: var(--color-bg-main);
+            background-color: var(--color-text-main);
+
+            overflow: visible;
+            white-space: nowrap;
+            text-overflow: clip;
+        }
+
+        border-top-right-radius: var(--radius-md);
+        border-bottom-right-radius: var(--radius-md);
+    }
+
+    button {
+        height: 100%;
+        aspect-ratio: 1 / 1;
+        align-self: stretch;
+
+        flex: 0;
+        border: none;
+
+        border-radius: var(--radius-md);
+
+        justify-content: center;
+        align-items: center;
+    }
+
+    &.Active {
+        h3 {
+            color: var(--color-bg-main);
+            background-color: var(--color-text-main);
+        }
+    }
+}

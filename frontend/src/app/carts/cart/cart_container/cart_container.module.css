@@ -1,0 +1,16 @@
+.CartContainer {
+    flex: 3;
+
+    background-color: var(--color-bg-main);
+
+    border-radius: var(--radius-md);
+    padding: var(--space-md);
+    padding-top: 0;
+
+    gap: var(--space-md);
+    display: flex;
+    flex-direction: column;
+    overflow-y: scroll;
+
+    height: 100%;
+}

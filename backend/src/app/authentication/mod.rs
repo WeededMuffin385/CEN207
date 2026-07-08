@@ -8,11 +8,12 @@ use axum::response::IntoResponse;
 use axum_extra::extract::CookieJar;
 use serde::Serialize;
 use sha2::{Digest, Sha256};
+use uuid::Uuid;
 
 pub const SESSION_TOKEN_COOKIE_NAME: &str = "session_token";
 
 pub struct Authentication {
-    pub account_id: i64,
+    pub account_id: Uuid,
 }
 
 impl FromRequestParts<Context> for Authentication {

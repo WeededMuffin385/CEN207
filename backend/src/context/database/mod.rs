@@ -1,14 +1,19 @@
+mod carts;
 pub mod config;
+mod products;
 
 use crate::context::database::config::DatabaseConfig;
+use chrono::{DateTime, Utc};
 use rand::Rng;
 use serde::{Deserialize, Serialize};
 use sha2::{Digest, Sha256};
-use sqlx::{PgPool, Postgres, Transaction};
 use sqlx::postgres::{PgConnectOptions, PgPoolOptions, PgSslMode};
+use sqlx::{PgPool, Postgres, Transaction};
+use std::collections::HashMap;
 use std::time::Duration;
 use tokio::time::sleep;
 use tracing::info;
+use uuid::Uuid;
 
 pub struct Database {
     pub pool: PgPool,
@@ -57,7 +62,7 @@ pub enum AccountIdentityProvider {
 }
 
 impl Database {
-    pub async fn google_authenticate(&self, id: &str, name: &str) -> i64 {
+    pub async fn google_auth(&self, id: &str, name: &str) -> Uuid {
         let mut tx = self.pool.begin().await.unwrap();
 
         let account_id = sqlx::query_scalar!(
@@ -105,23 +110,23 @@ impl Database {
         account_id
     }
 
-    pub async fn create_account(&self, tx: &mut Transaction<'_, Postgres>, name: &str) -> i64 {
+    pub async fn create_account(&self, tx: &mut Transaction<'_, Postgres>, name: &str) -> Uuid {
         let account_id = sqlx::query_scalar!(
-                    r#"
+            r#"
                     INSERT INTO accounts (name)
                     VALUES ($1)
                     RETURNING id 
                 "#,
-                    name
-                )
-            .fetch_one(&mut **tx)
-            .await
-            .unwrap();
+            name
+        )
+        .fetch_one(&mut **tx)
+        .await
+        .unwrap();
 
         account_id
     }
 
-    pub async fn create_session_token(&self, account_id: i64) -> String {
+    pub async fn create_session_token(&self, account_id: Uuid) -> String {
         let mut session_token_bytes = [0; 32];
         rand::rngs::ThreadRng::default().fill_bytes(&mut session_token_bytes);
 
@@ -154,7 +159,7 @@ impl Database {
     pub async fn get_account_id_by_session_token(
         &self,
         session_token: Vec<u8>,
-    ) -> Result<Option<i64>, sqlx::Error> {
+    ) -> Result<Option<Uuid>, sqlx::Error> {
         let account_id = sqlx::query_scalar!(
             r#"
             SELECT account_id
@@ -164,9 +169,45 @@ impl Database {
         "#,
             &session_token
         )
-            .fetch_optional(&self.pool)
-            .await?;
+        .fetch_optional(&self.pool)
+        .await?;
 
         Ok(account_id)
     }
+
+    
+}
+
+#[derive(Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct Cart {
+    pub id: Uuid,
+    pub name: String,
+    pub items: Vec<CartItem>,
+}
+
+#[derive(Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct CartItem {
+    product_id: Uuid,
+    quantity: i32,
+}
+
+#[derive(Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct Product {
+    id: Uuid,
+
+    title: String,
+    description: String,
+
+    price: i64,
+    currency: String,
+
+    rating: f32,
+    reviews: i32,
+
+    created_at: DateTime<Utc>,
+
+    image_url: String,
 }

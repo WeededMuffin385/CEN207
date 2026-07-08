@@ -12,10 +12,11 @@ anyhow = "1.0.102"
 reqwest = { version = "0.13.3", features = ["json", "rustls", "cookies", "form"] }
 
 axum = { version = "0.8.9", features = ["json", "ws"] }
-axum-extra = { version = "0.12.6", features = ["cookie", "typed-header"] }
+axum-extra = { version = "0.12.6", features = ["cookie", "typed-header", "query"] }
+time = "0.3.53"
 
 tokio = { version = "1.52.3", features = ["full", "signal"] }
-sqlx = { version = "0.9.0", features = ["postgres", "tls-rustls-aws-lc-rs", "runtime-tokio", "macros", "uuid", "ipnet"] }
+sqlx = { version = "0.9.0", features = ["postgres", "tls-rustls-aws-lc-rs", "runtime-tokio", "macros", "uuid", "ipnet", "bigdecimal", "chrono"] }
 
 tower-http = { version = "0.6.11", features = ["trace", "sensitive-headers"] }
 tracing = "0.1.44"
@@ -29,12 +30,13 @@ strum = { version = "0.28.0", features = ["derive"] }
 strum_macros = "0.28.0"
 
 
+url = "2.5.8"
 rand = "0.10.1"
 jsonwebtoken = { version = "10.4.0", features = ["rust_crypto"] }
 oauth2 = "5.0.0"
 sha2 = "0.11.0"
 base64-url = "3.0.4"
-time = "0.3.47"
+chrono = "0.4.45"
 
 aws-config = "1.8.17"
 aws-sdk-ec2 = "1.227.0"

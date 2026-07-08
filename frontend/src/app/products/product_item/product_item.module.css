@@ -1,0 +1,86 @@
+.ProductItem {
+    /*height: calc(256px * 1.75);*/
+
+    /*background-color: var(--color-bg-surface);*/
+    border-radius: var(--radius-md);
+
+    display: flex;
+    flex-direction: column;
+
+    gap: var(--space-sm);
+
+    img {
+        flex: 1;
+        border-radius: var(--radius-md);
+    }
+
+    button {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+
+        justify-content: center;
+        gap: var(--space-sm);
+
+        border-radius: var(--radius-md);
+        padding: var(--space-sm);
+
+        background-color: var(--color-text-muted);
+        color: var(--color-bg-main);
+
+        transition: color 0.3s ease, background-color 0.3s ease;
+
+        &:hover {
+            background-color: var(--color-bg-main);
+            color: var(--color-text-main);
+        }
+    }
+
+    .Info {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+
+        gap: var(--space-sm);
+
+        h2 {
+            font-size: 1rem;
+            display: flex;
+            flex-direction: row;
+
+            align-items: center;
+        }
+
+        .Reviews {
+            color: var(--color-text-muted);
+        }
+    }
+
+    .QuantityControl {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+
+        background-color: var(--color-text-muted);
+
+        border-radius: var(--radius-md);
+        padding: var(--space-sm);
+        color: var(--color-bg-main);
+
+        button {
+            font-size: 18px;
+            display: flex;
+
+            padding: 0;
+
+            align-items: center;
+            justify-content: center;
+
+            &:hover {
+                background-color: var(--color-text-muted);
+                color: var(--color-bg-main);
+            }
+        }
+    }
+}

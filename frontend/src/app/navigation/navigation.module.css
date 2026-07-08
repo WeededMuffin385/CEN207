@@ -1,13 +1,22 @@
 .Navigation {
     width: 100%;
-    border-bottom: solid var(--color-text) 2px;
     padding: var(--space-md);
+
+    position: sticky;
+    top: 0;
 
     display: flex;
     flex-direction: row;
 
+    background-color: var(--color-bg-main);
+
     h1 {
+        font-size: var(--font-size-5xl);
         align-content: center;
+
+        &:hover {
+            cursor: pointer;
+        }
     }
 
     .NavigationInner {
@@ -32,13 +41,13 @@
             display: flex;
             flex-direction: column;
 
-            background: var(--color-text);
+            background: var(--color-text-main);
             border-radius: var(--radius-md);
 
             p {
                 text-align: center;
                 white-space: normal;
-                color: var(--color-bg);
+                color: var(--color-bg-main);
                 margin: 0;
             }
 
@@ -56,11 +65,11 @@
             transition: background-color 0.2s ease;
 
             &:hover {
-                background: var(--color-bg);
+                background: var(--color-bg-main);
 
                 p,
                 .Icon {
-                    color: var(--color-text);
+                    color: var(--color-text-main);
                 }
             }
         }

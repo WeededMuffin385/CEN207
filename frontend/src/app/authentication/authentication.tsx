@@ -11,9 +11,16 @@ export default function Authentication() {
             <div className={styles.AuthenticationInner}>
                 <h2>Sign in or create your account</h2>
 
-                <button><FcGoogle className={styles.Icon}/>Sign in with Google</button>
+                <button
+                    onClick={() => {
+                        window.location.href = "/api/auth/google";
+                    }}
+                ><FcGoogle className={styles.Icon}/>Sign in with Google
+                </button>
 
-                <button onClick={() => navigate("/")}><IoMdExit className={styles.Icon}/> Return back</button>
+                <button onClick={() => navigate("/")}>
+                    <IoMdExit className={styles.Icon}/> Return back
+                </button>
             </div>
         </div>
     )
