@@ -11,6 +11,7 @@ setOptions({
 
 type Props = {
     onClose: () => void,
+    setSelectedAddress: (address: SelectedAddress) => void,
 }
 
 export default function AddressSelectionPopup(props: Props) {
@@ -139,6 +140,7 @@ export default function AddressSelectionPopup(props: Props) {
             <DeliveryOptionSidebar
                 onClose={props.onClose}
                 selectedAddress={selectedAddress}
+                setSelectedAddress={props.setSelectedAddress}
             />
 
             <div className={styles.MapContainer}>

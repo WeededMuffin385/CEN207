@@ -8,6 +8,7 @@ type DeliveryOption = "pickup_point" | "courier_delivery";
 type Props = {
     onClose: () => void,
     selectedAddress: SelectedAddress | null,
+    setSelectedAddress: (selectedAddress: SelectedAddress) => void,
 }
 
 export default function DeliveryOptionSidebar(props: Props) {
@@ -60,7 +61,14 @@ export default function DeliveryOptionSidebar(props: Props) {
 
                 <button
                     className={styles.Deliver}
-                    onClick={() => props.onClose()}
+                    onClick={() => {
+                        if (props.selectedAddress === null) {
+                            throw Error("Address is not selected")
+                        }
+
+                        props.setSelectedAddress(props.selectedAddress)
+                        props.onClose()
+                    }}
                 >Deliver here
                 </button>
             </>}

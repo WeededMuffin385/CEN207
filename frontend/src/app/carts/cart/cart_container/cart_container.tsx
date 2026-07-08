@@ -1,57 +1,14 @@
 import styles from './cart_container.module.css'
-import {useCarts} from "../../../../providers/carts/carts_hook.tsx";
-import {useParams} from "react-router";
-import {useProductsByIds} from "../../../../hooks/products_by_ids.tsx";
 import CartContainerItem from "./cart_container_item/cart_container_item.tsx";
+import type {Product} from "../../../../hooks/products.tsx";
+import type {Cart} from "../../../../providers/carts/carts_context.tsx";
 
-export default function CartContainer() {
-    const {carts} = useCarts()
-    const {cartId} = useParams()
+type Props = {
+    cart: Cart,
+    productsById: Map<string, Product>,
+}
 
-    const cart = carts.find((cart) => cart.id === cartId);
-    const productIds = cart?.items.map((item) => item.productId) ?? [];
-
-    const {
-        data: products = [],
-        isLoading: isProductsLoading,
-        error: productsError,
-    } = useProductsByIds(productIds);
-
-    const productsById = new Map(
-        products.map((product) => [product.id, product])
-    );
-
-    if (!cartId) {
-        return (
-            <div className={styles.Cart}>
-                Cart id is missing
-            </div>
-        )
-    }
-
-    if (!cart) {
-        return (
-            <div className={styles.Cart}>
-                Cart not found
-            </div>
-        )
-    }
-
-    if (isProductsLoading) {
-        return (
-            <div className={styles.Cart}>
-                Loading cart products...
-            </div>
-        );
-    }
-
-    if (productsError) {
-        return (
-            <div className={styles.Cart}>
-                Failed to load cart products
-            </div>
-        );
-    }
+export default function CartContainer({cart, productsById}: Props) {
 
     return (
         <div className={styles.CartContainer}>
