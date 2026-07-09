@@ -57,7 +57,7 @@
         padding: var(--space-sm);
 
         &.Underline {
-            border-bottom: 2px solid var(--color-text-main);
+            border-bottom: 2px solid var(--color-border-strong);
         }
     }
 
@@ -79,14 +79,15 @@
             align-items: center;
             justify-content: center;
             gap: var(--space-sm);
+            background-color: var(--color-bg-contrast);
+            color: var(--color-text-inverse);
 
 
             transition: background-color 0.2s ease, border 0.2s ease, color 0.2s ease;
 
             &:hover {
-                background-color: var(--color-text-main);
-
-                color: var(--color-bg-main);
+                background-color: var(--color-control-dark-hover);
+                color: var(--color-text-main);
             }
 
             .Icon {

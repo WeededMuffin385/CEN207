@@ -36,6 +36,11 @@
         background-color: var(--color-bg-surface);
         padding: var(--space-sm);
         border-radius: var(--radius-sm);
+        transition: background-color 0.2s ease, color 0.2s ease;
+
+        &:hover {
+            background-color: var(--color-bg-elevated);
+        }
     }
 
     .Option {
@@ -58,8 +63,18 @@
             padding: var(--space-sm);
             flex: 1;
             background-color: var(--color-bg-surface);
+            transition: background-color 0.2s ease, color 0.2s ease;
 
             &.Active {
+                background-color: var(--color-text-accent);
+                color: var(--color-text-inverse);
+            }
+
+            &:hover {
+                background-color: var(--color-bg-elevated);
+            }
+
+            &.Active:hover {
                 background-color: var(--color-text-accent);
             }
         }
@@ -69,7 +84,7 @@
         font-size: var(--font-size-xl);
         font-weight: var(--font-weight-md);
 
-        border: solid var(--color-text-main) 2px;
+        border: solid var(--color-border-strong) 2px;
         border-radius: var(--radius-md);
         width: 100%;
 
@@ -84,10 +99,10 @@
 
         transition: background-color 0.2s ease, border 0.2s ease, color 0.2s ease;
         &:hover {
-            background-color: var(--color-text-main);
-            border: solid var(--color-text-main) 2px;
+            background-color: var(--color-bg-contrast);
+            border: solid var(--color-bg-contrast) 2px;
 
-            color: var(--color-bg-main);
+            color: var(--color-text-inverse);
         }
 
         .Icon {

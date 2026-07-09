@@ -1,5 +1,5 @@
 .AddressSelectionPopup {
-    background-color: rgb(13 18 25 / 0.75);
+    background-color: var(--color-overlay);
 
     position: fixed;
 

@@ -5,7 +5,7 @@
     overflow: hidden;
 
     gap: var(--space-xs);
-    background-color: var(--color-text-main);
+    background-color: var(--color-bg-app-gap);
 
     h1 {
         text-align: center;

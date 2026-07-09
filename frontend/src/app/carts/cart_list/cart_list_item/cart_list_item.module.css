@@ -30,8 +30,8 @@
         text-overflow: ellipsis;
 
         &:hover {
-            color: var(--color-bg-main);
-            background-color: var(--color-text-main);
+            color: var(--color-text-inverse);
+            background-color: var(--color-bg-contrast);
 
             overflow: visible;
             white-space: nowrap;
@@ -58,8 +58,8 @@
 
     &.Active {
         h3 {
-            color: var(--color-bg-main);
-            background-color: var(--color-text-main);
+            color: var(--color-text-inverse);
+            background-color: var(--color-bg-contrast);
         }
     }
 }

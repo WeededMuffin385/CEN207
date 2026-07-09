@@ -36,18 +36,18 @@ export default function ProductItem(props: Props) {
             <img src={placeholder} alt="image"/>
 
             <div className={styles.Info}>
-                <Banknote color="#c061cb"/>
+                <Banknote className={styles.PriceIcon}/>
                 <span>AU$ {price}</span>
             </div>
 
             <div className={styles.Info}>
-                <Star color="#f8e45c"/>
+                <Star className={styles.RatingIcon}/>
                 <span>{rating}</span>
                 <span className={styles.Reviews}>· {reviews} reviews</span>
             </div>
 
             <div className={styles.Info}>
-                <Tag color="#1c71d8"/>
+                <Tag className={styles.TagIcon}/>
                 <h2>{props.title}</h2>
             </div>
 

@@ -42,11 +42,11 @@
             align-items: center;
             justify-content: space-between;
 
-            background-color: var(--color-text-muted);
+            background-color: var(--color-control-bg);
 
             border-radius: var(--radius-md);
             padding: var(--space-sm);
-            color: var(--color-bg-main);
+            color: var(--color-control-text);
 
             button {
                 font-size: 18px;
@@ -58,8 +58,8 @@
                 justify-content: center;
 
                 &:hover {
-                    background-color: var(--color-text-muted);
-                    color: var(--color-bg-main);
+                    background-color: var(--color-control-bg-hover);
+                    color: var(--color-control-text);
                 }
             }
         }
