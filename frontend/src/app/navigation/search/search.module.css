@@ -56,3 +56,11 @@
         }
     }
 }
+
+:global(html[data-theme="light"]) .Search {
+    border: 1px solid var(--color-border-strong);
+}
+
+:global(html[data-theme="light"]) .Search:focus-within {
+    border-color: var(--color-focus-ring);
+}

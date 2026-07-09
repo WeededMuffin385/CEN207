@@ -85,12 +85,47 @@
         --font-weight-md: 700;
         --font-weight-lg: 900;
     }
+
+    :root[data-theme="light"] {
+        --color-bg-main: #f7f9fc;
+        --color-bg-surface: #ffffff;
+        --color-bg-elevated: #eef2f7;
+        --color-bg-contrast: #111827;
+        --color-bg-app-gap: #d7dde8;
+
+        --color-text-main: #111827;
+        --color-text-muted: #5d6878;
+        --color-text-accent: #315ddc;
+        --color-text-inverse: #f8fafc;
+
+        --color-border: #d8dee8;
+        --color-border-strong: #aeb8c8;
+        --color-overlay: rgb(15 23 42 / 0.38);
+
+        --color-input-bg: #eef2f7;
+        --color-input-text: #111827;
+        --color-input-placeholder: #697586;
+
+        --color-control-bg: #202938;
+        --color-control-bg-hover: #334155;
+        --color-control-text: #f8fafc;
+        --color-control-dark-hover: #e7ecf3;
+        --color-focus-ring: #315ddc;
+
+        --color-icon-price: #9f35b5;
+        --color-icon-rating: #9a6f00;
+        --color-icon-tag: #1d63c8;
+    }
 }
 
 @layer base {
     html {
         color-scheme: dark;
         overflow: hidden;
+    }
+
+    html[data-theme="light"] {
+        color-scheme: light;
     }
 
     #root,
