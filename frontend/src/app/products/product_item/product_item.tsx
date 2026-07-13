@@ -1,6 +1,5 @@
 import styles from './product_item.module.css'
 import {Banknote, Minus, Plus, ShoppingCart, Star, Tag} from "lucide-react";
-import placeholder from './placeholder_dark.png'
 import {useCarts, useCurrentCartItem} from "../../../providers/carts/carts_hook.tsx";
 import type {CartItem} from "../../../providers/carts/carts_context.tsx";
 
@@ -33,7 +32,7 @@ export default function ProductItem(props: Props) {
 
     return (
         <div className={styles.ProductItem}>
-            <img src={placeholder} alt="image"/>
+            <img src={props.imageUrl} alt="image"/>
 
             <div className={styles.Info}>
                 <Banknote className={styles.PriceIcon}/>

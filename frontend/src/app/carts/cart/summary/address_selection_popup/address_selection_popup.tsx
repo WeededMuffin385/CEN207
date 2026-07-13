@@ -3,6 +3,7 @@ import {useEffect, useRef, useState} from "react";
 import {importLibrary, setOptions} from "@googlemaps/js-api-loader";
 import DeliveryOptionSidebar from "./delivery_option_sidebar/delivery_option_sidebar.tsx";
 import {getUserLocationOnce, type LatLng, type SelectedAddress} from "../../../../../utils/location.tsx";
+import {useTheme} from "../../../../../hooks/theme.tsx";
 
 setOptions({
     key: import.meta.env.VITE_GOOGLE_MAPS_API_KEY as string,
@@ -15,6 +16,7 @@ type Props = {
 }
 
 export default function AddressSelectionPopup(props: Props) {
+    const {theme} = useTheme();
     const mapRef = useRef<HTMLDivElement | null>(null);
     const autocompleteRef = useRef<HTMLDivElement | null>(null);
     const [selectedAddress, setSelectedAddress] = useState<SelectedAddress | null>(null);
@@ -25,12 +27,12 @@ export default function AddressSelectionPopup(props: Props) {
                 return;
             }
 
-            const { Map } = await importLibrary("maps");
-            const { AdvancedMarkerElement } = (await importLibrary(
+            const {Map} = await importLibrary("maps");
+            const {AdvancedMarkerElement} = (await importLibrary(
                 "marker",
             )) as google.maps.MarkerLibrary;
 
-            const { PlaceAutocompleteElement } = (await importLibrary(
+            const {PlaceAutocompleteElement} = (await importLibrary(
                 "places",
             )) as google.maps.PlacesLibrary;
 
@@ -52,17 +54,22 @@ export default function AddressSelectionPopup(props: Props) {
                 lng: defaultPosition.lng,
             });
 
+            const colorScheme =
+                theme === "dark"
+                    ? google.maps.ColorScheme.DARK
+                    : google.maps.ColorScheme.LIGHT;
+
             const map = new Map(mapRef.current, {
                 center: defaultPosition,
                 zoom: 16,
                 mapId: "36734faaaa12069470173954",
-                colorScheme: google.maps.ColorScheme.DARK,
+                colorScheme,
                 disableDefaultUI: true,
                 styles: [
                     {
                         featureType: "poi",
                         stylers: [
-                            { visibility: "off" },
+                            {visibility: "off"},
                         ],
                     },
                 ],
@@ -144,7 +151,7 @@ export default function AddressSelectionPopup(props: Props) {
             />
 
             <div className={styles.MapContainer}>
-                <div ref={autocompleteRef} className={styles.Autocomplete} />
+                <div ref={autocompleteRef} className={styles.Autocomplete}/>
                 <div
                     ref={mapRef}
                     className={styles.Map}

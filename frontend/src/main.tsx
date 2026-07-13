@@ -8,9 +8,6 @@ import {CartsProvider} from "./providers/carts/carts_provider.tsx";
 import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
 
 const queryClient = new QueryClient();
-const savedTheme = localStorage.getItem("theme");
-
-document.documentElement.dataset.theme = savedTheme === "light" ? "light" : "dark";
 
 createRoot(document.getElementById('root')!).render(
     <StrictMode>

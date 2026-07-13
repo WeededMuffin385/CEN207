@@ -1,6 +1,5 @@
 import styles from './cart_container_item.module.css'
 import type {Product} from "../../../../../hooks/products.tsx";
-import placeholder from '../../../../products/product_item/placeholder_dark.png'
 import {Minus, Plus, ShoppingCart, Trash2} from "lucide-react";
 import {useCarts} from "../../../../../providers/carts/carts_hook.tsx";
 
@@ -31,7 +30,7 @@ export default function CartContainerItem(props: Props) {
 
     return (
         <div className={styles.CartContainerItem}>
-            <img src={placeholder} alt={""}/>
+            <img src={props.product.imageUrl} alt={""}/>
 
 
             <div className={styles.Controls}>

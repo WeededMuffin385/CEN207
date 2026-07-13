@@ -7,6 +7,7 @@ import Product from "./products/product/product.tsx";
 import Navigation from "./navigation/navigation.tsx";
 import Carts from "./carts/carts.tsx";
 import Profile from "./profile/profile.tsx";
+import Orders from "./orders/orders.tsx";
 
 function App() {
 
@@ -17,6 +18,7 @@ function App() {
             <Routes>
                 <Route path="/" element={<Products/>}/>
                 <Route path="/auth" element={<Authentication/>}/>
+                <Route path="/orders" element={<Orders/>}/>
                 <Route path="/profile" element={<Profile/>}/>
 
                 <Route path="/carts/*" element={<Carts/>}/>

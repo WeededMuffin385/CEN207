@@ -1,5 +1,5 @@
 import styles from './navigation.module.css'
-import {LogIn, Moon, ShoppingCart, Sun, User} from "lucide-react"
+import {LogIn, Moon, Ship, ShoppingCart, Sun, User} from "lucide-react"
 import SearchComponent from "./search/search.tsx"
 import {useNavigate} from "react-router";
 import {useAuth} from "../../providers/auth/auth_hook.tsx";
@@ -65,6 +65,11 @@ export default function Navigation() {
                 <div className={styles.ButtonContainer} onClick={() => navigate("/carts")}>
                     <ShoppingCart className={styles.Icon}/>
                     <p>carts</p>
+                </div>
+
+                <div className={styles.ButtonContainer} onClick={() => navigate("/orders")}>
+                    <Ship className={styles.Icon}/>
+                    <p>orders</p>
                 </div>
             </div>
         </div>
