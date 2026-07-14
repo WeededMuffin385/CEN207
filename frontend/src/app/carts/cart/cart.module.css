@@ -27,7 +27,7 @@
     }
 
     .CartInner {
-        gap: 4px;
+        gap: var(--space-xs);
         display: flex;
         flex-direction: row;
         width: 100%;
