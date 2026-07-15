@@ -5,6 +5,7 @@ import {useState} from "react";
 import type {Cart} from "../../../../providers/carts/carts_context.tsx";
 import type {Product} from "../../../../hooks/products.tsx";
 import type {SelectedAddress} from "../../../../utils/location.tsx";
+import CheckoutPopup from "./checkout_popup/checkout_popup.tsx";
 
 type Props = {
     cart: Cart,
@@ -13,6 +14,8 @@ type Props = {
 
 export default function Summary({cart, productsById}: Props) {
     const [isAddressSelectionPopupOpen, setIsAddressSelectionPopupOpen] = useState(false)
+    const [isCheckoutPopupOpen, setIsCheckoutPopupOpen] = useState(false)
+
     const [selectedAddress, setSelectedAddress] = useState<SelectedAddress | null>(null)
 
     const item_subtotal_raw = cart.items.reduce((sum, item) => {
@@ -51,6 +54,8 @@ export default function Summary({cart, productsById}: Props) {
                 setSelectedAddress={setSelectedAddress}
             />}
 
+            {isCheckoutPopupOpen && <CheckoutPopup/>}
+
             <div className={styles.Header}>
                 <button className={styles.SelectAddress} onClick={() => setIsAddressSelectionPopupOpen(true)}>
                     <MapPinned/> select address
@@ -68,7 +73,7 @@ export default function Summary({cart, productsById}: Props) {
             <h3 className={styles.Underline}>Subtotal excluding taxes: {subtotal}</h3>
 
             <div className={styles.CheckOutButtonContainer}>
-                <button className={styles.CheckOut}>Check out</button>
+                <button className={styles.CheckOut} onClick={() => setIsCheckoutPopupOpen(true)}>Check out</button>
             </div>
         </div>
     );
