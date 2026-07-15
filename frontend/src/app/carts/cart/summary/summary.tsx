@@ -45,6 +45,20 @@ export default function Summary({cart, productsById}: Props) {
         maximumFractionDigits: 2,
     }).format((item_subtotal_raw + shipping_fee_raw) / 100);
 
+    const checkout = async () => {
+        await fetch(`/api/carts/${cart.id}/checkout`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                latitude: selectedAddress?.latitude,
+                longitude: selectedAddress?.longitude,
+                address: selectedAddress?.address,
+            }),
+        })
+    }
+
     console.log(`selected address: ${selectedAddress?.address}`)
 
     return (
@@ -73,7 +87,11 @@ export default function Summary({cart, productsById}: Props) {
             <h3 className={styles.Underline}>Subtotal excluding taxes: {subtotal}</h3>
 
             <div className={styles.CheckOutButtonContainer}>
+<<<<<<< HEAD
                 <button className={styles.CheckOut} onClick={() => setIsCheckoutPopupOpen(true)}>Check out</button>
+=======
+                <button className={styles.CheckOut} onClick={checkout}>Check out</button>
+>>>>>>> 0ef3302 ([BACKEND] Implemented checkout)
             </div>
         </div>
     );

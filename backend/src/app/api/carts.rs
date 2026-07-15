@@ -5,8 +5,9 @@ use axum::http::StatusCode;
 use axum::response::{IntoResponse, Response};
 use axum::routing::{delete, get, patch, post};
 use axum::{Json, Router};
-use serde::Deserialize;
+use serde::{Deserialize, Serialize};
 use serde_json::json;
+use sqlx::types::BigDecimal;
 use uuid::Uuid;
 
 /// Shopping cart
@@ -15,6 +16,7 @@ pub fn router() -> Router<Context> {
         .route("/", get(get_carts))
         .route("/", post(create_cart))
         .route("/{cart_id}", delete(remove_cart))
+        .route("/{cart_id}/order", post(checkout_cart))
         .route("/{cart_id}/items", post(add_cart_item))
         .route("/{cart_id}/items/{product_id}", patch(patch_cart_item))
         .route("/{cart_id}/items/{product_id}", delete(remove_cart_item))
@@ -71,8 +73,43 @@ async fn remove_cart(
         .remove_cart(authentication.account_id, cart_id)
         .await
         .unwrap();
-    
+
     StatusCode::OK.into_response()
+}
+
+#[derive(Debug, Deserialize)]
+struct CheckoutCartRequest {
+    latitude: BigDecimal,
+    longitude: BigDecimal,
+    address: String,
+}
+
+#[derive(Debug, Serialize)]
+struct CheckoutCartResponse {
+    order_id: Uuid,
+}
+
+async fn checkout_cart(
+    State(state): State<Context>,
+    authentication: Authentication,
+    Path(cart_id): Path<Uuid>,
+    Json(payload): Json<CheckoutCartRequest>,
+) -> Response {
+    let address = payload.address.trim();
+
+    let order_id = state
+        .0
+        .database
+        .cart_checkout(
+            authentication.account_id,
+            cart_id,
+            payload.latitude,
+            payload.longitude,
+            address,
+        )
+        .await.unwrap();
+
+    (StatusCode::CREATED, Json(CheckoutCartResponse{order_id})).into_response()
 }
 
 #[derive(Debug, Deserialize)]

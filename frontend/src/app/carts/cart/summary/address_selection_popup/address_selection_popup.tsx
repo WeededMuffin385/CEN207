@@ -50,8 +50,8 @@ export default function AddressSelectionPopup(props: Props) {
             }
             setSelectedAddress({
                 address: "",
-                lat: defaultPosition.lat,
-                lng: defaultPosition.lng,
+                latitude: defaultPosition.lat,
+                longitude: defaultPosition.lng,
             });
 
             const colorScheme =
@@ -80,8 +80,8 @@ export default function AddressSelectionPopup(props: Props) {
 
                 setSelectedAddress({
                     address,
-                    lat: location.lat,
-                    lng: location.lng,
+                    latitude: location.lat,
+                    longitude: location.lng,
                 });
             }
 
@@ -133,8 +133,8 @@ export default function AddressSelectionPopup(props: Props) {
 
                 setSelectedAddress({
                     address: place.formattedAddress ?? "",
-                    lat: nextLocation.lat,
-                    lng: nextLocation.lng,
+                    latitude: nextLocation.lat,
+                    longitude: nextLocation.lng,
                 });
             });
         }

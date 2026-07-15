@@ -1,6 +1,7 @@
 mod carts;
 pub mod config;
 mod products;
+mod orders;
 
 use crate::context::database::config::DatabaseConfig;
 use chrono::{DateTime, Utc};

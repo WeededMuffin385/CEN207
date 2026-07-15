@@ -48,11 +48,11 @@ export default function DeliveryOptionSidebar(props: Props) {
 
             {selectedOption === "courier_delivery" && <>
                 <h3>
-                    latitude: {props.selectedAddress?.lat}
+                    latitude: {props.selectedAddress?.latitude}
                 </h3>
 
                 <h3>
-                    longitude: {props.selectedAddress?.lng}
+                    longitude: {props.selectedAddress?.longitude}
                 </h3>
 
                 <h3>

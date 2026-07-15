@@ -5,8 +5,8 @@ export type LatLng = {
 
 export type SelectedAddress = {
     address: string;
-    lat: number;
-    lng: number;
+    latitude: number;
+    longitude: number;
 };
 
 const USER_LOCATION_STORAGE_KEY = "user_location";

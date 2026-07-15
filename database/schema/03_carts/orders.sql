@@ -13,12 +13,36 @@ CREATE TYPE order_status AS enum (
 
 CREATE TABLE orders
 (
-    id         UUID PRIMARY KEY      DEFAULT gen_random_uuid(),
+    id           UUID PRIMARY KEY      DEFAULT gen_random_uuid(),
 
-    created_by UUID         NOT NULL REFERENCES accounts (id),
-    paid_by    UUID         NOT NULL REFERENCES accounts (id),
+    created_by   UUID         NOT NULL REFERENCES accounts (id),
+    paid_by      UUID         NOT NULL REFERENCES accounts (id),
 
-    status     order_status NOT NULL DEFAULT 'pending_payment'
+    status       order_status NOT NULL DEFAULT 'pending_payment',
+
+    address      TEXT         NOT NULL,
+    latitude     NUMERIC(9, 6),
+    longitude    NUMERIC(9, 6),
+
+    created_at   TIMESTAMPTZ  NOT NULL DEFAULT now(),
+    updated_at   TIMESTAMPTZ  NOT NULL DEFAULT now(),
+    cancelled_at TIMESTAMPTZ,
+
+    CHECK (latitude BETWEEN -90 AND 90),
+    CHECK (longitude BETWEEN -180 AND 180)
+);
+
+CREATE TABLE order_products
+(
+    order_id   UUID    NOT NULL REFERENCES orders (id) ON DELETE CASCADE,
+    product_id UUID    NOT NULL REFERENCES products (id),
+
+    quantity   INTEGER NOT NULL CHECK (quantity > 0),
+
+    price      BIGINT  NOT NULL CHECK (price >= 0),
+    currency   CHAR(3) NOT NULL,
+
+    PRIMARY KEY (order_id, product_id)
 );
 
 
@@ -33,5 +57,7 @@ CREATE TABLE order_members
     order_id   UUID              NOT NULL REFERENCES orders (id),
     account_id UUID              NOT NULL REFERENCES accounts (id),
 
-    role       order_member_role NOT NULL DEFAULT 'viewer'
+    role       order_member_role NOT NULL DEFAULT 'viewer',
+
+    PRIMARY KEY (order_id, account_id)
 );
