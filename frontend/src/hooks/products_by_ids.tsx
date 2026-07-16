@@ -32,3 +32,12 @@ export function useProductsByIds(productIds: string[]) {
         },
     });
 }
+
+export function useProduct(productId: string | undefined) {
+    const query = useProductsByIds(productId ? [productId] : []);
+
+    return {
+        ...query,
+        product: query.data?.find((product) => product.id === productId),
+    };
+}

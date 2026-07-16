@@ -2,6 +2,7 @@ import styles from './cart_container_item.module.css'
 import type {Product} from "../../../../../hooks/products.tsx";
 import {Minus, Plus, ShoppingCart, Trash2} from "lucide-react";
 import {useCarts} from "../../../../../providers/carts/carts_hook.tsx";
+import {Link} from "react-router";
 
 
 type Props = {
@@ -10,7 +11,7 @@ type Props = {
 }
 
 export default function CartContainerItem(props: Props) {
-    const {currentCartId, updateQuantity} = useCarts();
+    const {currentCartId, updateQuantity, removeItem} = useCarts();
     const productId = props.product.id
     const quantity = props.quantity
 
@@ -30,11 +31,13 @@ export default function CartContainerItem(props: Props) {
 
     return (
         <div className={styles.CartContainerItem}>
-            <img src={props.product.imageUrl} alt={""}/>
+            <Link className={styles.ProductImageLink} to={`/products/${productId}`}>
+                <img src={props.product.imageUrl} alt={props.product.title}/>
+            </Link>
 
 
             <div className={styles.Controls}>
-                <h3>{props.product.title}</h3>
+                <h3><Link to={`/products/${productId}`}>{props.product.title}</Link></h3>
                 <p>AU$ {price}/ea</p>
                 <div className={styles.QuantityControl}>
                     <button
@@ -47,7 +50,23 @@ export default function CartContainerItem(props: Props) {
                         }}
                     ><Minus/></button>
 
-                    <span>{quantity}</span>
+                    <input
+                        key={quantity}
+                        type="number"
+                        min="1"
+                        inputMode="numeric"
+                        aria-label={`${props.product.title} quantity`}
+                        defaultValue={quantity}
+                        onBlur={(event) => {
+                            const parsed = Number.parseInt(event.currentTarget.value, 10);
+                            const nextQuantity = Number.isFinite(parsed) ? Math.max(1, parsed) : quantity;
+                            event.currentTarget.value = String(nextQuantity);
+                            if (nextQuantity !== quantity) void updateQuantity(currentCartId, productId, nextQuantity);
+                        }}
+                        onKeyDown={(event) => {
+                            if (event.key === "Enter") event.currentTarget.blur();
+                        }}
+                    />
 
                     <button
                         onClick={() => {
@@ -59,7 +78,7 @@ export default function CartContainerItem(props: Props) {
                         }}
                     ><Plus/></button>
                 </div>
-                <button><Trash2/></button>
+                <button aria-label={`Remove ${props.product.title}`} onClick={() => void removeItem(currentCartId, productId)}><Trash2/></button>
             </div>
         </div>
     )
