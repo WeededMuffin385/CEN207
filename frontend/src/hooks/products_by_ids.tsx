@@ -10,6 +10,10 @@ export function useProductsByIds(productIds: string[]) {
 
         enabled: ids.length > 0,
 
+        // Keep the cart and checkout mounted while an item mutation changes
+        // the ID query key and the reduced product set is being refreshed.
+        placeholderData: (previousProducts) => previousProducts,
+
         queryFn: async (): Promise<Product[]> => {
             const params = new URLSearchParams();
 
