@@ -1,6 +1,7 @@
+use serde_json::Value;
 use std::fs::read_to_string;
 use std::path::Path;
-use serde_json::Value;
+use std::{fs, io};
 
 const LOCAL_URL: &str = "http://localhost:5173";
 const PRODUCTION_URL: &str = "https://cen207.zagoruiko.dev";
@@ -14,8 +15,17 @@ pub struct GoogleConfig {
 
 impl GoogleConfig {
     pub fn local() -> Self {
-        const CLIENT_SECRET_PATH: &str = "/assets/google/client_secret_736684389094-to6nttrhqpsnmtnlu4m26m1mt3kead65.apps.googleusercontent.com.json";
-        let secret = read_to_string(CLIENT_SECRET_PATH).unwrap();
+        let path = fs::read_dir("/assets/google")
+            .unwrap()
+            .filter_map(Result::ok)
+            .map(|entry| entry.path())
+            .find(|path| path.is_file())
+            .ok_or_else(|| {
+                io::Error::new(io::ErrorKind::NotFound, "no files in the /assets/google")
+            })
+            .unwrap();
+
+        let secret = read_to_string(&path).unwrap();
         let secret: Value = serde_json::from_str(&secret).unwrap();
         let client_secret = secret["web"]["client_secret"].as_str().unwrap().to_string();
         let client_id = secret["web"]["client_id"].as_str().unwrap().to_string();
