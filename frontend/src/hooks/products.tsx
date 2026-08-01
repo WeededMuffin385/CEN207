@@ -1,4 +1,5 @@
-import { useInfiniteQuery } from "@tanstack/react-query";
+import {useInfiniteQuery} from "@tanstack/react-query";
+import {getCardImage} from "../placeholders/placeholders.tsx";
 
 export type Product = {
     id: string,
@@ -46,7 +47,12 @@ export function useProducts() {
                 throw new Error(`Failed to load products: ${response.status}`);
             }
 
-            return response.json() as Promise<Product[]>;
+            const products = await response.json() as Product[];
+
+            return products.map((product) => ({
+                ...product,
+                imageUrl: product.imageUrl || getCardImage(product.id),
+            }));
         },
 
         getNextPageParam: (lastPage): ProductsCursor | undefined => {

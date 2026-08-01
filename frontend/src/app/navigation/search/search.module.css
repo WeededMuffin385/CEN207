@@ -4,10 +4,10 @@
 
     font-size: 2rem;
     border-radius: var(--radius-md);
-    border: none;
     align-content: center;
 
-    background: white;
+    border: solid var(--space-xs) var(--color-input-bg);
+    background: var(--color-input-bg);
 
     display: flex;
     flex-direction: row;
@@ -19,9 +19,9 @@
         height: 100%;
 
 
-        background: white;
+        background: var(--color-input-bg);
 
-        color: black;
+        color: var(--color-input-text);
 
         padding: var(--space-sm);
         border-radius: var(--radius-md);
@@ -45,13 +45,22 @@
         width: auto;
 
         transition: color 0.2s ease;
-        color: darkgray;
+        color: var(--color-input-placeholder);
         &:hover {
-            color: black;
+            color: var(--color-input-text);
         }
 
         &.SearchIcon {
-            background: pink;
+            background: var(--color-text-accent);
+            color: var(--color-text-inverse);
         }
     }
+}
+
+:global(html[data-theme="light"]) .Search {
+    border: solid var(--space-xs) var(--color-bg-app-gap);
+}
+
+:global(html[data-theme="light"]) .Search:focus-within {
+    border-color: var(--color-focus-ring);
 }

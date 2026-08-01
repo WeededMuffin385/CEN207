@@ -1,5 +1,6 @@
 use crate::context::database::{Cart, CartItem, Database};
 use std::collections::HashMap;
+use sqlx::types::BigDecimal;
 use uuid::Uuid;
 
 impl Database {
@@ -155,6 +156,141 @@ impl Database {
         }
 
         Ok(())
+    }
+
+    pub async fn cart_checkout(
+        &self,
+        account_id: Uuid,
+        cart_id: Uuid,
+        latitude: BigDecimal,
+        longitude: BigDecimal,
+        address: &str,
+    ) -> Result<Uuid, sqlx::Error> {
+        let mut transaction = self.pool.begin().await?;
+
+        sqlx::query!(
+            r#"
+        SELECT c.id
+        FROM carts AS c
+        INNER JOIN cart_members AS cm
+            ON cm.cart_id = c.id
+        WHERE c.id = $2
+          AND cm.account_id = $1
+          AND cm.role IN (
+              'owner'::cart_member_role,
+              'editor'::cart_member_role
+          )
+        FOR UPDATE OF c
+        "#,
+            account_id,
+            cart_id,
+        )
+        .fetch_optional(&mut *transaction)
+        .await?
+        .unwrap_or_else(|| {
+            panic!(
+                "cart not found or access denied: \
+             account_id={account_id}, cart_id={cart_id}"
+            )
+        });
+
+        let order_id = sqlx::query_scalar!(
+            r#"
+        INSERT INTO orders (
+            created_by,
+            status,
+            latitude,
+            longitude,
+            address
+        )
+        SELECT
+            $1,
+            'pending_payment'::order_status,
+            $3,
+            $4,
+            $5
+        WHERE EXISTS (
+            SELECT 1
+            FROM cart_products
+            WHERE cart_id = $2
+        )
+        RETURNING id
+        "#,
+            account_id,
+            cart_id,
+            latitude,
+            longitude,
+            address,
+        )
+        .fetch_optional(&mut *transaction)
+        .await?
+        .unwrap_or_else(|| {
+            panic!(
+                "cannot checkout empty cart: \
+             account_id={account_id}, cart_id={cart_id}"
+            )
+        });
+
+        let inserted_products = sqlx::query!(
+            r#"
+        INSERT INTO order_products (
+            order_id,
+            product_id,
+            quantity,
+            price,
+            currency
+        )
+        SELECT
+            $1,
+            cp.product_id,
+            cp.quantity,
+            p.price,
+            p.currency
+        FROM cart_products AS cp
+        INNER JOIN products AS p
+            ON p.id = cp.product_id
+        WHERE cp.cart_id = $2
+        "#,
+            order_id,
+            cart_id,
+        )
+        .execute(&mut *transaction)
+        .await?;
+
+        if inserted_products.rows_affected() == 0 {
+            panic!(
+                "order was created without products: \
+             order_id={order_id}, cart_id={cart_id}"
+            );
+        }
+
+        sqlx::query!(
+            r#"
+        INSERT INTO order_members (
+            order_id,
+            account_id,
+            role
+        )
+        SELECT
+            $1,
+            cm.account_id,
+            CASE
+                WHEN cm.role = 'owner'::cart_member_role
+                    THEN 'owner'::order_member_role
+                ELSE 'viewer'::order_member_role
+            END
+        FROM cart_members AS cm
+        WHERE cm.cart_id = $2
+        "#,
+            order_id,
+            cart_id,
+        )
+        .execute(&mut *transaction)
+        .await?;
+
+        transaction.commit().await?;
+
+        Ok(order_id)
     }
 
     pub async fn cart_remove_item(

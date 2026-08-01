@@ -1,8 +1,8 @@
 import styles from './product_item.module.css'
 import {Banknote, Minus, Plus, ShoppingCart, Star, Tag} from "lucide-react";
-import placeholder from './placeholder_dark.png'
 import {useCarts, useCurrentCartItem} from "../../../providers/carts/carts_hook.tsx";
 import type {CartItem} from "../../../providers/carts/carts_context.tsx";
+import {Link} from "react-router";
 
 type Props = {
     id: string,
@@ -33,22 +33,22 @@ export default function ProductItem(props: Props) {
 
     return (
         <div className={styles.ProductItem}>
-            <img src={placeholder} alt="image"/>
+            <Link to={`/products/${props.id}`}><img src={props.imageUrl} alt={props.title}/></Link>
 
             <div className={styles.Info}>
-                <Banknote color="#c061cb"/>
+                <Banknote className={styles.PriceIcon}/>
                 <span>AU$ {price}</span>
             </div>
 
             <div className={styles.Info}>
-                <Star color="#f8e45c"/>
+                <Star className={styles.RatingIcon}/>
                 <span>{rating}</span>
                 <span className={styles.Reviews}>· {reviews} reviews</span>
             </div>
 
             <div className={styles.Info}>
-                <Tag color="#1c71d8"/>
-                <h2>{props.title}</h2>
+                <Tag className={styles.TagIcon}/>
+                <h2><Link to={`/products/${props.id}`}>{props.title}</Link></h2>
             </div>
 
             <ProductCartButton

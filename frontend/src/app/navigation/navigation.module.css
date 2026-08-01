@@ -41,20 +41,20 @@
             display: flex;
             flex-direction: column;
 
-            background: var(--color-text-main);
+            background: var(--color-bg-contrast);
             border-radius: var(--radius-md);
 
             p {
                 text-align: center;
                 white-space: normal;
-                color: var(--color-bg-main);
+                color: var(--color-text-inverse);
                 margin: 0;
             }
 
             .Icon {
                 height: 50%;
                 width: auto;
-                color: black;
+                color: var(--color-text-inverse);
             }
 
             p,
@@ -65,7 +65,7 @@
             transition: background-color 0.2s ease;
 
             &:hover {
-                background: var(--color-bg-main);
+                background: var(--color-control-dark-hover);
 
                 p,
                 .Icon {

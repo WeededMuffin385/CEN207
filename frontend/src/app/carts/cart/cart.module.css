@@ -1,7 +1,7 @@
 .Cart {
     flex: 4;
 
-    background: var(--color-text-main);
+    background: var(--color-bg-app-gap);
 
     border-top-left-radius: var(--radius-md);
     border-bottom-left-radius: var(--radius-md);
@@ -13,7 +13,7 @@
     gap: var(--space-xs);
 
 
-    h2 {
+    & > h2 {
         border-top-left-radius: var(--radius-md);
         border-bottom-left-radius: var(--radius-md);
 
@@ -27,7 +27,7 @@
     }
 
     .CartInner {
-        gap: 4px;
+        gap: var(--space-xs);
         display: flex;
         flex-direction: row;
         width: 100%;

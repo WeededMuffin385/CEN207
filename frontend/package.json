@@ -7,10 +7,13 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
+    "test": "vitest run",
     "preview": "vite preview"
   },
   "dependencies": {
     "@googlemaps/js-api-loader": "^2.1.1",
+    "@stripe/react-stripe-js": "^6.7.0",
+    "@stripe/stripe-js": "^9.10.0",
     "@tanstack/react-query": "^5.101.2",
     "lucide-react": "^1.21.0",
     "react": "^19.2.6",

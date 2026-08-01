@@ -3,6 +3,11 @@
     flex-direction: row;
     flex-shrink: 0;
 
+    .ProductImageLink {
+        height: 100%;
+        flex: 0 0 auto;
+    }
+
     img {
         height: 100%;
         border-radius: var(--radius-md);
@@ -42,11 +47,11 @@
             align-items: center;
             justify-content: space-between;
 
-            background-color: var(--color-text-muted);
+            background-color: var(--color-control-bg);
 
             border-radius: var(--radius-md);
             padding: var(--space-sm);
-            color: var(--color-bg-main);
+            color: var(--color-control-text);
 
             button {
                 font-size: 18px;
@@ -58,9 +63,26 @@
                 justify-content: center;
 
                 &:hover {
-                    background-color: var(--color-text-muted);
-                    color: var(--color-bg-main);
+                    background-color: var(--color-control-bg-hover);
+                    color: var(--color-control-text);
                 }
+            }
+
+            input {
+                width: 52px;
+                min-height: 32px;
+                padding: 0 var(--space-xs);
+                border: 0;
+                border-inline: 1px solid color-mix(in srgb, var(--color-control-text) 24%, transparent);
+                border-radius: 0;
+                color: var(--color-control-text);
+                background: transparent;
+                text-align: center;
+                font-weight: var(--font-weight-md);
+                appearance: textfield;
+
+                &::-webkit-inner-spin-button,
+                &::-webkit-outer-spin-button { margin: 0; appearance: none; }
             }
         }
     }

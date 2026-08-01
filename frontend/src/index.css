@@ -36,10 +36,32 @@
     :root {
         --color-bg-main: #0f1115;
         --color-bg-surface: #171a21;
+        --color-bg-elevated: #1f2430;
+        --color-bg-contrast: #e8edf6;
+        --color-bg-app-gap: #252b36;
 
         --color-text-main: #f2f4f8;
         --color-text-muted: #9aa3b2;
         --color-text-accent: #7c9cff;
+        --color-text-inverse: #10141b;
+
+        --color-border: #2b3342;
+        --color-border-strong: #465166;
+        --color-overlay: rgb(8 12 18 / 0.78);
+
+        --color-input-bg: #f4f7fb;
+        --color-input-text: #111827;
+        --color-input-placeholder: #647084;
+
+        --color-control-bg: #c7d0de;
+        --color-control-bg-hover: #dce4ef;
+        --color-control-text: #111827;
+        --color-control-dark-hover: #242b38;
+        --color-focus-ring: #9db5ff;
+
+        --color-icon-price: #d889e2;
+        --color-icon-rating: #f6dd68;
+        --color-icon-tag: #6ba8ff;
 
         --space-xs: 4px;
         --space-sm: 8px;
@@ -63,12 +85,47 @@
         --font-weight-md: 700;
         --font-weight-lg: 900;
     }
+
+    :root[data-theme="light"] {
+        --color-bg-main: #f7f9fc;
+        --color-bg-surface: #ffffff;
+        --color-bg-elevated: #eef2f7;
+        --color-bg-contrast: #111827;
+        --color-bg-app-gap: #d7dde8;
+
+        --color-text-main: #111827;
+        --color-text-muted: #5d6878;
+        --color-text-accent: #315ddc;
+        --color-text-inverse: #f8fafc;
+
+        --color-border: #d8dee8;
+        --color-border-strong: #aeb8c8;
+        --color-overlay: rgb(15 23 42 / 0.38);
+
+        --color-input-bg: #eef2f7;
+        --color-input-text: #111827;
+        --color-input-placeholder: #697586;
+
+        --color-control-bg: #202938;
+        --color-control-bg-hover: #334155;
+        --color-control-text: #f8fafc;
+        --color-control-dark-hover: #e7ecf3;
+        --color-focus-ring: #315ddc;
+
+        --color-icon-price: #9f35b5;
+        --color-icon-rating: #9a6f00;
+        --color-icon-tag: #1d63c8;
+    }
 }
 
 @layer base {
     html {
         color-scheme: dark;
         overflow: hidden;
+    }
+
+    html[data-theme="light"] {
+        color-scheme: light;
     }
 
     #root,
@@ -97,5 +154,15 @@
         background: none;
         color: inherit;
         cursor: pointer;
+    }
+
+    button:disabled {
+        cursor: not-allowed;
+        opacity: 0.64;
+    }
+
+    :focus-visible {
+        outline: 2px solid var(--color-focus-ring);
+        outline-offset: 2px;
     }
 }

@@ -1,5 +1,5 @@
 .Popup {
-    background-color: rgb(13 18 25 / 0.75);
+    background-color: var(--color-overlay);
 
     position: fixed;
 
@@ -24,10 +24,10 @@
         padding: var(--space-md);
         gap: var(--space-md);
 
-        border: solid var(--color-text-main) 2px;
+        border: solid var(--color-border-strong) 2px;
         border-radius: var(--radius-md);
 
-        background-color: var(--color-bg-main);
+        background-color: var(--color-bg-surface);
 
 
         display: flex;
@@ -40,7 +40,7 @@
 
 
         button {
-            border: solid var(--color-text-main) 2px;
+            border: solid var(--color-border-strong) 2px;
             border-radius: var(--radius-md);
             width: 100%;
 
@@ -55,10 +55,10 @@
 
             transition: background-color 0.2s ease, border 0.2s ease, color 0.2s ease;
             &:hover {
-                background-color: var(--color-text-main);
-                border: solid var(--color-text-main) 2px;
+                background-color: var(--color-bg-contrast);
+                border: solid var(--color-bg-contrast) 2px;
 
-                color: var(--color-bg-main);
+                color: var(--color-text-inverse);
             }
 
             .Icon {
@@ -76,13 +76,13 @@
             min-width: 0;
 
 
-            background: white;
+            background: var(--color-input-bg);
 
-            color: black;
+            color: var(--color-input-text);
 
             padding: var(--space-sm);
             border-radius: var(--radius-sm);
-            border: none;
+            border: 1px solid var(--color-border-strong);
             align-content: center;
 
             &,

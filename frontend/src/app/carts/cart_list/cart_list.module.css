@@ -2,7 +2,7 @@
     flex: 1;
     min-width: 256px;
 
-    background: var(--color-text-main);
+    background: var(--color-bg-app-gap);
 
     border-top-right-radius: var(--radius-md);
     border-bottom-right-radius: var(--radius-md);
@@ -58,8 +58,8 @@
         transition: background-color 0.2s ease, border 0.2s ease, color 0.2s ease;
 
         &:hover {
-            background-color: var(--color-text-main);
-            color: var(--color-bg-main);
+            background-color: var(--color-bg-contrast);
+            color: var(--color-text-inverse);
         }
 
         .Icon {
