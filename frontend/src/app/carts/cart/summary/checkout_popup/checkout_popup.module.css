@@ -1,2 +1,18 @@
-.CheckoutPopup { position: fixed; inset: 0; z-index: 1000; display: grid; place-items: center; padding: var(--space-md); overflow: auto; background: var(--color-overlay); backdrop-filter: blur(8px); }
-@media (max-width: 760px) { .CheckoutPopup { display: block; padding: 0; } }
+.CheckoutPopup {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    display: grid;
+    place-items: center;
+    padding: var(--space-md);
+    overflow: auto;
+    background: var(--color-overlay);
+    backdrop-filter: blur(8px);
+}
+
+@media (max-width: 760px) {
+    .CheckoutPopup {
+        display: block;
+        padding: 0;
+    }
+}

@@ -2,7 +2,6 @@
 
 members = [
     "backend",
-
 ]
 
 
@@ -30,7 +29,6 @@ serde_json = "1.0.149"
 
 strum = { version = "0.28.0", features = ["derive"] }
 strum_macros = "0.28.0"
-
 
 url = "2.5.8"
 rand = "0.10.1"

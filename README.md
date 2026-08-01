@@ -14,9 +14,9 @@ Torrens University subject repository. Ecommerce system
 
 # Setup
 ### 1. Create a new web client using Google Cloud Console Oauth 2.0 Clients panel and paste the document into the ./assets/google
-1. Download the web client secret json document
+1. Download the web client secret JSON document
 2. Create a ./assets/google directory, if it does not exist
-3. Move the document into the ./assets/google directory
+3. Move the document into the ./assets/google directoryW
 
 ```bash
 (
