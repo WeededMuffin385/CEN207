@@ -4,6 +4,7 @@ import ReferencesPage from "./slides/references_slide.tsx";
 import Slide from "./slides/slide.tsx";
 import RoadmapPage from "./slides/roadmap_slide.tsx";
 import BudgetPage from "./slides/budget_slide.tsx";
+import FrontendShowcaseSlide from "./slides/frontend_showcase_slide.tsx";
 
 export default function App() {
     return (
@@ -12,6 +13,8 @@ export default function App() {
             <Slide />
             <Slide />
             <ReferencesPage />
+            <Slide />
+            <FrontendShowcaseSlide />
             <Slide />
             <RoadmapPage />
             <Slide />

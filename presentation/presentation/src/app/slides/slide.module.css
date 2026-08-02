@@ -156,10 +156,86 @@
     & > .Chart {
         flex: 1;
     }
+
+    .CurrentDateLabel {
+        position: relative;
+
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+
+
+        padding: 6px 10px;
+
+        color: black;
+        font-size: var(--font-size-4);
+        white-space: nowrap;
+
+        background: #65e6e1;
+        border: 1px solid rgb(255 255 255 / 25%);
+        border-radius: 8px;
+
+        box-shadow:
+                0 4px 12px rgb(0 0 0 / 18%),
+                inset 0 1px 0 rgb(255 255 255 / 30%);
+    }
 }
 
 .BudgetSlide {
     & > .Chart {
         flex: 1;
+    }
+}
+
+.FrontendShowcaseSlide {
+    & > .Line {
+        flex: 1;
+
+        display: flex;
+        flex-direction: row;
+        gap: 32px;
+
+        min-width: 0;
+        min-height: 0;
+
+        & > .Element {
+            flex: 1;
+
+            display: flex;
+            flex-direction: column;
+
+            min-width: 0;
+            min-height: 0;
+
+            gap: 16px;
+            overflow: hidden;
+
+            & > video {
+                flex: 1;
+                background-color: lightgray;
+                border-radius: 32px;
+
+                display: block;
+                object-fit: cover;
+                object-position: left center;
+            }
+
+            & > .Definition {
+                background-color: lightgray;
+                height: 128px;
+                padding: 16px;
+
+                border-radius: 32px;
+
+                & > h2 {
+                    margin: 0 0 16px;
+                }
+
+                & > p {
+                    font-size: var(--font-size-4);
+                    margin: 0;
+                }
+            }
+        }
     }
 }

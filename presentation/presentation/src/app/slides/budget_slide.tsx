@@ -7,6 +7,10 @@ import {HighchartsReact} from "highcharts-react-official";
 import {useEffect, useRef} from "react";
 
 const options: Highcharts.Options = {
+    credits: {
+        enabled: false
+    },
+
     chart: {
         type: "pie",
         backgroundColor: "transparent",
