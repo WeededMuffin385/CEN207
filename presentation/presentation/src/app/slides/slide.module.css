@@ -1,0 +1,165 @@
+@import "open-props/style";
+
+.Slide {
+    width: 42cm;
+    height: 29.7cm;
+
+    overflow: hidden;
+    padding: 32px;
+
+    position: relative;
+    background-color: darkmagenta;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 32px;
+
+    & > h1 {
+        font-size: var(--font-size-8);
+        color: yellow;
+
+        margin: 0;
+    }
+}
+
+.TitlePage {
+    align-items: center;
+    justify-content: center;
+
+    & > .Hero {
+
+        & > h1 {
+            text-align: left;
+            font-size: var(--font-size-8);
+            color: yellow;
+        }
+
+        & > h2 {
+            color: yellow;
+            text-align: left;
+            font-size: var(--font-size-8);
+        }
+
+        & > h3 {
+
+                object-position: 0;
+            color: yellow;
+            text-align: center;
+            font-size: var(--font-size-4);
+        }
+    }
+
+    & > h3 {
+        position: absolute;
+        color: yellow;
+        text-align: center;
+        font-size: var(--font-size-4);
+        margin: 32px;
+
+        &.Info {
+            top: 0;
+            right: 0;
+        }
+
+        &.Credits {
+            bottom: 0;
+
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            align-items: baseline;
+
+            & > span.Name {
+                white-space: nowrap;
+
+                &:not(:last-child)::after {
+                    content: " · ";
+                    white-space: pre;
+                }
+            }
+        }
+    }
+}
+
+
+.ReferencesSlide {
+    & > .References {
+        gap: 32px;
+        flex: 1;
+        display: flex;
+        flex-direction: row;
+        overflow: hidden;
+
+        & > .Reference {
+            overflow: hidden;
+            flex: 1;
+            background-color: aqua;
+            position: relative;
+
+            border-radius: 32px;
+
+            & > img {
+                overflow: hidden;
+                width: auto;
+                height: 100%;
+            }
+
+            & > .Title {
+                position: absolute;
+                bottom: 0;
+
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+
+                align-items: center;
+
+                & > h2 {
+                    backdrop-filter: blur(12px);
+                    padding: 16px;
+                    border-radius: 16px;
+
+                    font-size: var(--font-size-6);
+                }
+            }
+
+
+            &:nth-child(1) {
+                & > .Title {
+                    & > h2 {
+                        color: purple;
+                    }
+                }
+            }
+
+            &:nth-child(2) {
+                & > .Title {
+                    & > h2 {
+                        color: black;
+                    }
+                }
+            }
+
+            &:nth-child(3) {
+                & > .Title {
+                    & > h2 {
+                        color: darkorange;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.RoadmapSlide {
+    & > .Chart {
+        flex: 1;
+    }
+}
+
+.BudgetSlide {
+    & > .Chart {
+        flex: 1;
+    }
+}

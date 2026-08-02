@@ -1,0 +1,28 @@
+@import "modern-normalize";
+
+@font-face {
+    font-family: "Comic Relief";
+    src: url("./assets/fonts/comic_relief/ComicRelief-Regular.ttf") format("truetype");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Comic Relief";
+    src: url("./assets/fonts/comic_relief/ComicRelief-Bold.ttf") format("truetype");
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+
+:root {
+    font-family: "Comic Relief", cursive !important;
+}
+
+button,
+input,
+textarea,
+select {
+    font: inherit;
+}
