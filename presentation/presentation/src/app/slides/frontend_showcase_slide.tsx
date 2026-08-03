@@ -22,10 +22,10 @@ export default function FrontendShowcaseSlide() {
                     />
                     <div className={styles.Definition}>
                         <h2>
-                            Multi-cart system
+                            Multiple independent carts
                         </h2>
                         <p>
-                            Lorem ipsum dolor sit amet. Et fuga sint qui minima iusto et libero facere ea
+                            Create and share multiple carts for collaborative shopping.
                         </p>
                     </div>
                 </div>
@@ -43,7 +43,7 @@ export default function FrontendShowcaseSlide() {
                             Infinite product list
                         </h2>
                         <p>
-                            Lorem ipsum dolor sit amet. Et fuga sint qui minima iusto et libero facere ea
+                            Continuous product discovery without manual page navigation.
                         </p>
                     </div>
                 </div>
@@ -61,7 +61,7 @@ export default function FrontendShowcaseSlide() {
                             Day and night themes
                         </h2>
                         <p>
-                            Lorem ipsum dolor sit amet. Et fuga sint qui minima iusto et libero facere ea
+                            Adaptive interface designed for accessibility and user preference.
                         </p>
                     </div>
                 </div>
@@ -82,7 +82,7 @@ export default function FrontendShowcaseSlide() {
                             Google Accounts integration
                         </h2>
                         <p>
-                            Lorem ipsum dolor sit amet. Et fuga sint qui minima iusto et libero facere ea
+                            Secure authentication through an existing Google identity.
                         </p>
                     </div>
                 </div>
@@ -100,7 +100,7 @@ export default function FrontendShowcaseSlide() {
                             Google Maps integration
                         </h2>
                         <p>
-                            Lorem ipsum dolor sit amet. Et fuga sint qui minima iusto et libero facere ea
+                            Visual address selection and delivery location confirmation.
                         </p>
                     </div>
                 </div>
@@ -118,7 +118,7 @@ export default function FrontendShowcaseSlide() {
                             Clean checkout process
                         </h2>
                         <p>
-                            Lorem ipsum dolor sit amet. Et fuga sint qui minima iusto et libero facere ea
+                            A focused checkout flow covering delivery, payment and order review.
                         </p>
                     </div>
                 </div>

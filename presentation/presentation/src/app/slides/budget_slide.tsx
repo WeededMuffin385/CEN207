@@ -6,6 +6,23 @@ import "highcharts/highcharts-3d";
 import {HighchartsReact} from "highcharts-react-official";
 import {useEffect, useRef} from "react";
 
+
+
+type BudgetItem = readonly [name: string, value: number];
+
+const budgetData: BudgetItem[] = [
+    ["Programming", 135_000],
+    ["Infrastructure", 85_000],
+    ["Marketing", 55_000],
+    ["Other", 35_000],
+];
+
+const total = budgetData.reduce(
+    (sum, [, value]) => sum + value,
+    0,
+);
+
+
 const options: Highcharts.Options = {
     credits: {
         enabled: false
@@ -37,6 +54,16 @@ const options: Highcharts.Options = {
         }
     },
 
+    subtitle: {
+        text: `Total: $${Highcharts.numberFormat(total, 0)}`,
+        style: {
+            fontFamily: "inherit",
+            fontSize: "var(--font-size-5)",
+            fontWeight: "700",
+            color: "yellow",
+        },
+    },
+
     plotOptions: {
         pie: {
             depth: 35,
@@ -60,12 +87,7 @@ const options: Highcharts.Options = {
     series: [
         {
             type: "pie",
-            data: [
-                ["Programming", 135_000],
-                ["Infrastructure", 85_000],
-                ["Marketing", 55_000],
-                ["Other", 35_000],
-            ],
+            data: budgetData,
         },
     ],
 };
