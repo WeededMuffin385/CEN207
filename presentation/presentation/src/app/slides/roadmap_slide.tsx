@@ -198,8 +198,8 @@ const options: Highcharts.Options = {
         {
             currentDateIndicator: {
                 width: 2,
-                color: "#00ffff4f",
-                zIndex: 128,
+                zIndex: 0,
+                color: "cyan",
 
                 label: {
                     useHTML: true,
@@ -222,6 +222,7 @@ const options: Highcharts.Options = {
 
             labels: {
                 style: {
+                    color: "yellow",
                     fontFamily: "inherit",
                     fontSize: "var(--font-size-4)",
                 },
@@ -238,6 +239,7 @@ const options: Highcharts.Options = {
 
             labels: {
                 style: {
+                    color: "yellow",
                     fontFamily: "inherit",
                     fontSize: "var(--font-size-4)",
                     fontWeight: "700",
@@ -270,6 +272,7 @@ const options: Highcharts.Options = {
 
         labels: {
             style: {
+                color: "yellow",
                 fontFamily: "inherit",
                 fontSize: "var(--font-size-3)",
             },

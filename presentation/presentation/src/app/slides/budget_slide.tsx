@@ -28,6 +28,11 @@ const options: Highcharts.Options = {
         enabled: false
     },
 
+    tooltip: {
+        headerFormat: '<span style="font-size: var(--font-size-5); font-weight: 700">{point.key}</span><br/><br/>',
+        pointFormat: '<span style="font-size: var(--font-size-5)">${point.y:,.0f}</span>',
+    },
+
     chart: {
         type: "pie",
         backgroundColor: "transparent",

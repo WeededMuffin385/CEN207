@@ -26,3 +26,53 @@ textarea,
 select {
     font: inherit;
 }
+
+html {
+    background-color: black;
+
+    scroll-snap-type: y mandatory;
+    scroll-behavior: smooth;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+:root {
+    --slide-width:  42cm;
+    --slide-height:  29.7cm;
+}
+
+@page {
+    size:  42cm  29.7cm;
+    margin: 0;
+}
+
+@media print {
+    html,
+    body {
+        margin: 0;
+        padding: 0;
+    }
+
+    .slides {
+        margin: 0;
+        padding: 0;
+    }
+
+    /* Скрываем элементы интерфейса */
+    .no-print {
+        display: none !important;
+    }
+}

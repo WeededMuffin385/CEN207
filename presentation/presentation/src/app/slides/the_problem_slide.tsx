@@ -31,34 +31,19 @@ export default function TheProblemSlide() {
 
             <ul className="solution__features">
                 <li>
-                    <strong>Product discovery. </strong>
-                    <span>
-                        Explore an continuously expanding catalogue through a fast,
-                        responsive interface.
-                    </span>
+                    <strong>Continuous product discovery.</strong>
                 </li>
 
                 <li>
                     <strong>Multiple shared carts. </strong>
-                    <span>
-                        Create, manage and share independent carts for collaborative
-                        shopping.
-                    </span>
                 </li>
 
                 <li>
                     <strong>Google-powered services. </strong>
-                    <span>
-                        Sign in with Google and select delivery locations through
-                        Google Maps.
-                     </span>
                 </li>
 
                 <li>
                     <strong>Unified checkout. </strong>
-                    <span>
-                        Complete delivery, payment and order review in one focused flow.
-                    </span>
                 </li>
             </ul>
         </div>
