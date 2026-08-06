@@ -4,9 +4,6 @@ export default function TheProblemSlide() {
     return (
         <div className={`${styles.Slide} ${styles.TheProblemSlide}`}>
             <h1>The Problem</h1>
-            <p>
-                Ecommerce platforms are powerful, but fragmented.
-            </p>
 
             <ul className="problem__list">
                 <li>Sellers rely on multiple disconnected tools.</li>
@@ -23,12 +20,6 @@ export default function TheProblemSlide() {
             <div className={styles.Space} />
 
             <h1>Our Solution</h1>
-            <p>
-                Nightberries combines product discovery, collaborative carts,
-                authentication, delivery selection and checkout in a single
-                ecommerce platform.
-            </p>
-
             <ul className="solution__features">
                 <li>
                     <strong>Continuous product discovery.</strong>

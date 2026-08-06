@@ -441,12 +441,12 @@
         background:
                 linear-gradient(
                         90deg,
-                        #ffff00 0%,
+                        darkorange 0%,
                         #ffffff 35%,
-                        #ffff00 60%,
-                        #ffcc00 100%
+                        darkorange 60%,
+                        darkorange 100%
                 );
-        background-size: 220% 100%;
+        background-size: 200% 100%;
         background-clip: text;
         -webkit-background-clip: text;
         animation: shimmer_b 2.2s linear infinite;
@@ -468,7 +468,7 @@
     }
 
     to {
-        background-position: -20% 0;
+        background-position: 0 0;
     }
 }
 

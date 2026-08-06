@@ -10,32 +10,32 @@ const comparisonRows = [
     {
         capability: "Multiple independent carts",
         traditional: "Usually one active cart",
-        oneStop: "Multiple separate carts",
+        nightberries: "Multiple separate carts",
     },
     {
         capability: "Collaborative shopping",
         traditional: "Rarely supported",
-        oneStop: "Shareable carts",
+        nightberries: "Shareable carts",
     },
     {
         capability: "Authentication",
         traditional: "Platform-specific account",
-        oneStop: "Google Accounts",
+        nightberries: "Google Accounts",
     },
     {
         capability: "Delivery selection",
         traditional: "Manual address entry",
-        oneStop: "Google Maps integration",
+        nightberries: "Google Maps integration",
     },
     {
         capability: "Checkout",
         traditional: "Fragmented flow",
-        oneStop: "Unified checkout",
+        nightberries: "Unified checkout",
     },
     {
         capability: "Architecture",
         traditional: "Closed or legacy systems",
-        oneStop: "Modern modular stack",
+        nightberries: "Modern modular stack",
     },
 ];
 
@@ -51,7 +51,7 @@ export default function ComptetitiveLandscapePage() {
                 <tr>
                     <th>Capability</th>
                     <th>Traditional Marketplace</th>
-                    <th>OneStop</th>
+                    <th>Nightberries</th>
                 </tr>
                 </thead>
 
@@ -60,7 +60,7 @@ export default function ComptetitiveLandscapePage() {
                     <tr key={row.capability}>
                         <td>{row.capability}</td>
                         <td>{row.traditional}</td>
-                        <td>{row.oneStop}</td>
+                        <td>{row.nightberries}</td>
                     </tr>
                 ))}
                 </tbody>
