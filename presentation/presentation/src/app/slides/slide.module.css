@@ -312,7 +312,7 @@
             }
 
             & > .Definition {
-                background-color: lightgray;
+                background-color: rgb(211 211 211 / 0.4);
                 height: 128px;
                 padding: 16px;
 

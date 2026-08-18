@@ -50,7 +50,7 @@ const options: Highcharts.Options = {
     },
 
     title: {
-        text: "Budget for 1.0 release",
+        text: "",
         style: {
             fontFamily: "inherit",
             fontSize: "var(--font-size-6)",
@@ -63,7 +63,7 @@ const options: Highcharts.Options = {
         text: `Total: $${Highcharts.numberFormat(total, 0)}`,
         style: {
             fontFamily: "inherit",
-            fontSize: "var(--font-size-5)",
+            fontSize: "var(--font-size-6)",
             fontWeight: "700",
             color: "yellow",
         },
@@ -136,7 +136,7 @@ export default function BudgetPage() {
 
     return (
         <div className={`${styles.Slide} ${styles.BudgetSlide}`}>
-            <h1>Budget</h1>
+            <h1>Budget for 1.0 release</h1>
 
             <div ref={wrapperRef} className={styles.Chart}>
 

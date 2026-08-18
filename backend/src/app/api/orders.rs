@@ -28,7 +28,12 @@ async fn cancel_order(
     Path(order_id): Path<Uuid>,
     authentication: Authentication,
 ) -> Response {
-    let result = state.0.database.cancel_order(authentication.account_id, order_id).await.unwrap();
+    let result = state
+        .0
+        .database
+        .cancel_order(authentication.account_id, order_id)
+        .await
+        .unwrap();
 
     match result {
         None => StatusCode::NOT_FOUND.into_response(),
