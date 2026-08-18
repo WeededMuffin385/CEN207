@@ -88,7 +88,7 @@ async fn auth_google_callback(
             .http_only(true)
             .secure(true)
             .same_site(SameSite::Lax)
-            .max_age(time::Duration::days(14)),
+            .max_age(time::Duration::days(30)),
     );
 
     let jar = jar.remove(Cookie::build(GOOGLE_OAUTH_STATE_COOKIE_NAME).path("/"));

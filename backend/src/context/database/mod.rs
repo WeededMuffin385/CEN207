@@ -1,7 +1,7 @@
 mod carts;
 pub mod config;
-mod products;
 mod orders;
+mod products;
 
 use crate::context::database::config::DatabaseConfig;
 use chrono::{DateTime, Utc};
@@ -175,8 +175,6 @@ impl Database {
 
         Ok(account_id)
     }
-
-    
 }
 
 #[derive(Serialize, Deserialize)]

@@ -22,7 +22,10 @@ pub fn router() -> Router<Context> {
         .route("/{cart_id}/items/{product_id}", delete(remove_cart_item))
 }
 
-async fn get_carts(State(state): State<Context>, authentication: Authentication) -> Response {
+async fn get_carts(
+    State(state): State<Context>, 
+    authentication: Authentication
+) -> Response {
     let carts = state
         .0
         .database

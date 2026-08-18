@@ -1,0 +1,13 @@
+.App {
+    gap: 29.7cm;
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+}
+
+@media print {
+    .App {
+        gap: 0;
+    }
+}

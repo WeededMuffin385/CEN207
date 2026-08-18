@@ -1,0 +1,78 @@
+@import "modern-normalize";
+
+@font-face {
+    font-family: "Comic Relief";
+    src: url("./assets/fonts/comic_relief/ComicRelief-Regular.ttf") format("truetype");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Comic Relief";
+    src: url("./assets/fonts/comic_relief/ComicRelief-Bold.ttf") format("truetype");
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+
+:root {
+    font-family: "Comic Relief", cursive !important;
+}
+
+button,
+input,
+textarea,
+select {
+    font: inherit;
+}
+
+html {
+    background-color: black;
+
+    scroll-snap-type: y mandatory;
+    scroll-behavior: smooth;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+:root {
+    --slide-width:  42cm;
+    --slide-height:  29.7cm;
+}
+
+@page {
+    size:  42cm  29.7cm;
+    margin: 0;
+}
+
+@media print {
+    html,
+    body {
+        margin: 0;
+        padding: 0;
+    }
+
+    .slides {
+        margin: 0;
+        padding: 0;
+    }
+
+    /* Скрываем элементы интерфейса */
+    .no-print {
+        display: none !important;
+    }
+}
